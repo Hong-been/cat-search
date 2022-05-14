@@ -3,12 +3,15 @@ console.log("app is running!");
 class App {
 	$target = null;
 	state = {
-		data: [],
+		data: window.sessionStorage.getItem("lastestResults")
+			? JSON.parse(window.sessionStorage.getItem("lastestResults"))
+			: [],
 		isLoading: false,
 		searchedKeyword: [],
 	};
 
 	constructor($target) {
+		console.log(this);
 		this.$target = $target;
 
 		const $searchHeader = document.createElement("header");
@@ -92,9 +95,7 @@ class App {
 
 		this.searchResult = new SearchResult({
 			$target,
-			initialData: window.sessionStorage.getItem("lastestResults")
-				? JSON.parse(window.sessionStorage.getItem("lastestResults"))
-				: [],
+			initialData: this.state.data,
 			onClick: async (image) => {
 				this.setState({
 					...this.state,
@@ -134,7 +135,8 @@ class App {
 	}
 
 	setState(nextData) {
-		console.log(this, nextData);
+		console.log(nextData);
+
 		this.state = nextData;
 
 		this.searchInput.setState(this.state.searchedKeyword);

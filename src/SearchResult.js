@@ -9,7 +9,15 @@ class SearchResult {
 		$target.appendChild(this.$searchResult);
 
 		this.data = initialData;
-		this.onClick = onClick;
+
+		this.$searchResult.addEventListener("click", (e) => {
+			const item = e.target.closest(".item");
+			if (!item) return;
+
+			const {index} = item.dataset;
+			onClick(this.data[index]);
+		});
+
 		this.render();
 	}
 
@@ -30,18 +38,12 @@ class SearchResult {
 
 		this.$searchResult.innerHTML = this.data
 			.map(
-				(cat) => `
-          <li class="item">
+				(cat, index) => `
+          <li class="item" data-index=${index}>
             <img src=${cat.url} alt=${cat.name} />
           </ul>
         `
 			)
 			.join("");
-
-		this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
-			$item.addEventListener("click", () => {
-				this.onClick(this.data[index]);
-			});
-		});
 	}
 }

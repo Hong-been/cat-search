@@ -45,7 +45,6 @@ class SearchInput {
 			if (this.timer) clearTimeout(this.timer);
 
 			this.timer = setTimeout(() => {
-				console.log("enter~~~~~~~~");
 				onAddSearchedKeyword(e.target.value);
 				onSearch(e.target.value);
 			}, 200);
