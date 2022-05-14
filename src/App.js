@@ -10,7 +10,6 @@ export default class App {
 		data: window.sessionStorage.getItem("lastestResults")
 			? JSON.parse(window.sessionStorage.getItem("lastestResults"))
 			: [],
-		isLoading: false,
 		searchedKeyword: [],
 	};
 
@@ -41,10 +40,7 @@ export default class App {
 				});
 			},
 			onSearch: async (keyword) => {
-				this.setState({
-					...this.state,
-					isLoading: true,
-				});
+				this.loading.setState(true);
 
 				try {
 					const {data} = await api.fetchCats(keyword);
@@ -52,12 +48,10 @@ export default class App {
 						? this.setState({
 								...this.state,
 								data,
-								isLoading: false,
 						  })
 						: this.setState({
 								...this.state,
 								data: [],
-								isLoading: false,
 						  });
 
 					window.sessionStorage.setItem(
@@ -66,33 +60,26 @@ export default class App {
 					);
 				} catch (e) {
 					console.error(e);
-					this.setState({
-						...this.state,
-						isLoading: false,
-					});
 					alert("일시적으로 서버에 문제가 있습니다.");
+				} finally {
+					this.loading.setState(false);
 				}
 			},
 			onRandomClick: async () => {
-				this.setState({
-					...this.state,
-					isLoading: true,
-				});
+				this.loading.setState(true);
 
 				// random50 fetch해서 뿌리기
 				try {
 					const {data} = await api.fetchRandom50();
 					this.setState({
+						...this.state,
 						data,
-						isLoading: false,
 					});
 				} catch (e) {
 					console.error(e);
-					this.setState({
-						...this.state,
-						isLoading: false,
-					});
 					alert("일시적으로 서버에 문제가 있습니다.");
+				} finally {
+					this.loading.setState(false);
 				}
 			},
 		});
@@ -101,18 +88,10 @@ export default class App {
 			$target,
 			initialData: this.state.data,
 			onClick: async (image) => {
-				this.setState({
-					...this.state,
-					isLoading: true,
-				});
+				this.loading.setState(true);
 
-				// fetch해서 image에 temperament,origin 추가해서 넘기기
 				try {
 					const {data} = await api.fetchCatById(image.id);
-					this.setState({
-						...this.state,
-						isLoading: false,
-					});
 
 					this.imageInfo.setState({
 						visible: true,
@@ -120,11 +99,9 @@ export default class App {
 					});
 				} catch (e) {
 					console.error(e);
-					this.setState({
-						...this.state,
-						isLoading: false,
-					});
 					alert("일시적으로 서버에 문제가 있습니다.");
+				} finally {
+					this.loading.setState(false);
 				}
 			},
 		});
@@ -145,6 +122,5 @@ export default class App {
 
 		this.searchInput.setState(this.state.searchedKeyword);
 		this.searchResult.setState(this.state.data);
-		this.loading.setState(this.state.isLoading);
 	}
 }
