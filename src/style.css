@@ -59,7 +59,7 @@ button{
 }
 
 .SearchResult .item {
-  background-color: #eee;
+  background-color: var(--background);
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;

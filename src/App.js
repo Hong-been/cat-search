@@ -24,6 +24,18 @@ export default class App {
 		this.$searchHeader.className = "SearchHeader";
 		$target.appendChild(this.$searchHeader);
 
+		const handleFetch = async (fetch) => {
+			try {
+				this.loading.setState(true);
+				await fetch();
+			} catch (e) {
+				console.error(e);
+				alert("일시적으로 서버에 문제가 있습니다.");
+			} finally {
+				this.loading.setState(false);
+			}
+		};
+
 		this.loading = new Loading({
 			$target: $searchHeader,
 			data: false,
@@ -32,20 +44,13 @@ export default class App {
 		this.randomButton = new RandomButton({
 			$target: $searchHeader,
 			onClick: async () => {
-				this.loading.setState(true);
-
-				try {
+				handleFetch(async () => {
 					const {data} = await api.fetchRandom50();
 					this.setState({
 						...this.state,
 						data,
 					});
-				} catch (e) {
-					console.error(e);
-					alert("일시적으로 서버에 문제가 있습니다.");
-				} finally {
-					this.loading.setState(false);
-				}
+				});
 			},
 		});
 
@@ -62,9 +67,8 @@ export default class App {
 				});
 			},
 			onSearch: async (keyword) => {
-				this.loading.setState(true);
-
-				try {
+				handleFetch(async () => {
+					console.log(keyword);
 					const {data} = await api.fetchCats(keyword);
 					data
 						? this.setState({
@@ -80,38 +84,23 @@ export default class App {
 						"lastestResults",
 						JSON.stringify(this.state.data)
 					);
-				} catch (e) {
-					console.error(e);
-					alert("일시적으로 서버에 문제가 있습니다.");
-				} finally {
-					this.loading.setState(false);
-				}
+				});
 			},
 		});
 
-		this.themeButton = new ThemeButton({
-			$target: $searchHeader,
-		});
-
+		this.themeButton = new ThemeButton({$target: $searchHeader});
 		this.searchResult = new SearchResult({
 			$target,
 			initialData: this.state.data,
 			onClick: async (image) => {
-				this.loading.setState(true);
-
-				try {
+				handleFetch(async () => {
 					const {data} = await api.fetchCatById(image.id);
 
 					this.imageInfo.setState({
 						visible: true,
 						image: data,
 					});
-				} catch (e) {
-					console.error(e);
-					alert("일시적으로 서버에 문제가 있습니다.");
-				} finally {
-					this.loading.setState(false);
-				}
+				});
 			},
 		});
 
