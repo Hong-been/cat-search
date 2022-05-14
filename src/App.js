@@ -1,6 +1,10 @@
-console.log("app is running!");
+import SearchInput from "./SearchInput.js";
+import SearchResult from "./SearchResult.js";
+import Loading from "./Loading.js";
+import ImageInfo from "./ImageInfo.js";
+import {api} from "./api.js";
 
-class App {
+export default class App {
 	$target = null;
 	state = {
 		data: window.sessionStorage.getItem("lastestResults")

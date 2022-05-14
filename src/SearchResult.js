@@ -1,4 +1,6 @@
-class SearchResult {
+import {imageLazyLoading} from "./utils/lazyLoad.js";
+
+export default class SearchResult {
 	$searchResult = null;
 	data = null;
 	onClick = null;
@@ -46,18 +48,6 @@ class SearchResult {
 			)
 			.join("");
 
-		const io = new IntersectionObserver((entries, observer) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					const img = entry.target.querySelector("img");
-					img.src = entry.target.dataset.url;
-
-					observer.unobserve(entry.target);
-				}
-			});
-		});
-		this.$searchResult.querySelectorAll(".item").forEach((item) => {
-			io.observe(item);
-		});
+		imageLazyLoading(this.$searchResult.querySelectorAll(".item"));
 	}
 }

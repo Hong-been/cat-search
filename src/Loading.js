@@ -1,4 +1,4 @@
-class Loading {
+export default class Loading {
 	data = null;
 
 	constructor({$target, data}) {

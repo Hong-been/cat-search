@@ -1,6 +1,6 @@
 const TEMPLATE = '<input type="text">';
 
-class SearchInput {
+export default class SearchInput {
 	constructor({
 		$target,
 		initialData,
