@@ -39,11 +39,25 @@ class SearchResult {
 		this.$searchResult.innerHTML = this.data
 			.map(
 				(cat, index) => `
-          <li class="item" data-index=${index}>
-            <img src=${cat.url} alt=${cat.name} />
+          <li class="item" data-index=${index} data-url=${cat.url}>
+            <img src="" alt=${cat.name.split(" ").join("")} />
           </ul>
         `
 			)
 			.join("");
+
+		const io = new IntersectionObserver((entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const img = entry.target.querySelector("img");
+					img.src = entry.target.dataset.url;
+
+					observer.unobserve(entry.target);
+				}
+			});
+		});
+		this.$searchResult.querySelectorAll(".item").forEach((item) => {
+			io.observe(item);
+		});
 	}
 }
