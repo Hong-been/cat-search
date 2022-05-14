@@ -1,13 +1,7 @@
 const TEMPLATE = '<input type="text">';
 
 export default class SearchInput {
-	constructor({
-		$target,
-		initialData,
-		onAddSearchedKeyword,
-		onSearch,
-		onRandomClick,
-	}) {
+	constructor({$target, initialData, onAddSearchedKeyword, onSearch}) {
 		const $searchInput = document.createElement("input");
 		this.$searchInput = $searchInput;
 		this.$searchInput.placeholder = "고양이를 검색해보세요. |";
@@ -16,15 +10,8 @@ export default class SearchInput {
 			this.$searchInput.value = "";
 		});
 
-		const $randomButton = document.createElement("button");
-		this.$randomButton = $randomButton;
-		this.$randomButton.innerText = "랜덤 고양이를 불러옵니다. |";
-
 		$searchInput.className = "SearchInput";
-		$target.appendChild($searchInput);
-
-		$randomButton.className = "RandomButton";
-		$target.appendChild($randomButton);
+		$target.insertAdjacentElement("afterbegin", $searchInput);
 
 		const $dataList = document.createElement("ul");
 		this.$dataList = $dataList;
@@ -48,10 +35,6 @@ export default class SearchInput {
 				onAddSearchedKeyword(e.target.value);
 				onSearch(e.target.value);
 			}, 200);
-		});
-
-		$randomButton.addEventListener("click", () => {
-			onRandomClick();
 		});
 
 		this.data = initialData;

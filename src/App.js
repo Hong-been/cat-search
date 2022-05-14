@@ -1,4 +1,6 @@
 import SearchInput from "./SearchInput.js";
+import RandomButton from "./RandomButton.js";
+import ThemeButton from "./ThemeButton.js";
 import SearchResult from "./SearchResult.js";
 import Loading from "./Loading.js";
 import ImageInfo from "./ImageInfo.js";
@@ -25,6 +27,26 @@ export default class App {
 		this.loading = new Loading({
 			$target: $searchHeader,
 			data: false,
+		});
+
+		this.randomButton = new RandomButton({
+			$target: $searchHeader,
+			onClick: async () => {
+				this.loading.setState(true);
+
+				try {
+					const {data} = await api.fetchRandom50();
+					this.setState({
+						...this.state,
+						data,
+					});
+				} catch (e) {
+					console.error(e);
+					alert("일시적으로 서버에 문제가 있습니다.");
+				} finally {
+					this.loading.setState(false);
+				}
+			},
 		});
 
 		this.searchInput = new SearchInput({
@@ -65,23 +87,10 @@ export default class App {
 					this.loading.setState(false);
 				}
 			},
-			onRandomClick: async () => {
-				this.loading.setState(true);
+		});
 
-				// random50 fetch해서 뿌리기
-				try {
-					const {data} = await api.fetchRandom50();
-					this.setState({
-						...this.state,
-						data,
-					});
-				} catch (e) {
-					console.error(e);
-					alert("일시적으로 서버에 문제가 있습니다.");
-				} finally {
-					this.loading.setState(false);
-				}
-			},
+		this.themeButton = new ThemeButton({
+			$target: $searchHeader,
 		});
 
 		this.searchResult = new SearchResult({
