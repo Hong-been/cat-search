@@ -64,6 +64,15 @@ button{
   margin: 0 0 1em;
   width: 100%;
   cursor: pointer;
+  position: relative;
+}
+.SearchResult .item:hover::before{
+  content: attr(tooltip);
+  position: absolute;
+  background-color: var(--background);
+  color: var(--color);
+  font-size: 1.25rem;
+  padding: 5px 10px;
 }
 
 .SearchInput {

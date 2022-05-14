@@ -16,7 +16,6 @@ export default class App {
 	};
 
 	constructor($target) {
-		console.log(this);
 		this.$target = $target;
 
 		const $searchHeader = document.createElement("header");
@@ -68,7 +67,6 @@ export default class App {
 			},
 			onSearch: async (keyword) => {
 				handleFetch(async () => {
-					console.log(keyword);
 					const {data} = await api.fetchCats(keyword);
 					data
 						? this.setState({
@@ -114,8 +112,6 @@ export default class App {
 	}
 
 	setState(nextData) {
-		console.log(nextData);
-
 		this.state = nextData;
 
 		this.searchInput.setState(this.state.searchedKeyword);

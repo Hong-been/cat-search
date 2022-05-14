@@ -41,7 +41,10 @@ export default class SearchResult {
 		this.$searchResult.innerHTML = this.data
 			.map(
 				(cat, index) => `
-          <li class="item" data-index=${index} data-url=${cat.url}>
+          <li class="item" data-index=${index} data-url=${
+					cat.url
+				} tooltip=${cat.name.split(" ").join("")}
+				}>
             <img src="" alt=${cat.name.split(" ").join("")} />
           </ul>
         `
