@@ -52,6 +52,11 @@ class App {
 								data: [],
 								isLoading: false,
 						  });
+
+					window.sessionStorage.setItem(
+						"lastestResults",
+						JSON.stringify(this.state.data)
+					);
 				} catch (e) {
 					console.error(e);
 					this.setState({
@@ -87,7 +92,9 @@ class App {
 
 		this.searchResult = new SearchResult({
 			$target,
-			initialData: this.state.data,
+			initialData: window.sessionStorage.getItem("lastestResults")
+				? JSON.parse(window.sessionStorage.getItem("lastestResults"))
+				: [],
 			onClick: async (image) => {
 				this.setState({
 					...this.state,

@@ -35,14 +35,20 @@ class SearchInput {
 			if (!keyword) return;
 
 			this.$searchInput.value = keyword.innerText;
-			onSearch(keyword.value);
+			onSearch(keyword.innerText);
 		});
 
-		$searchInput.addEventListener("keyup", (e) => {
-			if (e.key === "Enter") {
+		this.timer = null;
+		$searchInput.addEventListener("keydown", (e) => {
+			if (e.key !== "Enter") return;
+
+			if (this.timer) clearTimeout(this.timer);
+
+			this.timer = setTimeout(() => {
+				console.log("enter~~~~~~~~");
 				onAddSearchedKeyword(e.target.value);
 				onSearch(e.target.value);
-			}
+			}, 200);
 		});
 
 		$randomButton.addEventListener("click", () => {
@@ -50,6 +56,7 @@ class SearchInput {
 		});
 
 		this.data = initialData;
+		this.render();
 	}
 	setState(nextData) {
 		this.data = nextData;
@@ -59,7 +66,10 @@ class SearchInput {
 	render() {
 		this.$dataList.innerHTML = this.data
 			.map((word) => {
-				return `<li class="searcedKeyword">${word}</li>`;
+				return `
+        <li class="searcedKeyword">
+          <button>${word}</button>
+        </li>`;
 			})
 			.join("");
 	}
