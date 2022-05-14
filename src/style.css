@@ -100,7 +100,7 @@ button{
   border: 1px solid #eee;
   border-radius: 5px;
   width: 60%;
-  max-height: 500px;
+  max-height: 700px;
   overflow-y: scroll;
 }
 

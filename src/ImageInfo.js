@@ -26,8 +26,28 @@ export default class ImageInfo {
 			}
 		});
 
-		this.data = data;
+		this.$imageInfo.innerHTML = `
+        <dialog class="content-wrapper" open>
+          <header class="title">
+            <span class="name"></span>
+            <button class="close">x</button>
+          </header>
+          <img id="img"/>        
+          <ul class="description">
+            <li id="temperament"></li>
+            <li id="origin"></li>
+          </ul>
+        </dialog>`;
 
+		const closeButton = this.$imageInfo.querySelector(".close");
+		closeButton.addEventListener("click", () => {
+			this.setState({
+				visible: false,
+				image: null,
+			});
+		});
+
+		this.data = data;
 		this.render();
 	}
 
@@ -40,26 +60,14 @@ export default class ImageInfo {
 		if (this.data.visible) {
 			const {name, url, temperament, origin} = this.data.image;
 
-			this.$imageInfo.innerHTML = `
-        <dialog class="content-wrapper" open>
-          <header class="title">
-            <span>${name}</span>
-            <button class="close">x</button>
-          </header>
-          <img src="${url}" alt="${name}"/>        
-          <ul class="description">
-            <li>성격: ${temperament}</li>
-            <li>태생: ${origin}</li>
-          </ul>
-        </dialog>`;
+			this.$imageInfo.querySelector(".name").innerText = name;
+			this.$imageInfo.querySelector("#img").src = url;
+			this.$imageInfo.querySelector("#img").alt = name;
+			this.$imageInfo.querySelector(
+				"#temperament"
+			).innerText = `성격: ${temperament}`;
+			this.$imageInfo.querySelector("#origin").innerText = `태생: ${origin}`;
 
-			const closeButton = this.$imageInfo.querySelector(".close");
-			closeButton.addEventListener("click", () => {
-				this.setState({
-					visible: false,
-					image: null,
-				});
-			});
 			this.$imageInfo.style.display = "block";
 		} else {
 			this.$imageInfo.style.display = "none";
