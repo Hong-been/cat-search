@@ -59,17 +59,19 @@ button{
 }
 
 .SearchResult .item {
-  background-color: var(--background);
+  background-color: gray;
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+  min-height: 200px;
   cursor: pointer;
   position: relative;
 }
 .SearchResult .item:hover::before{
   content: attr(tooltip);
   position: absolute;
-  background-color: var(--background);
+  border-radius: 3px;
+  background-color: rgba(125, 125, 125, 0.691);
   color: var(--color);
   font-size: 1.25rem;
   padding: 5px 10px;
@@ -79,6 +81,10 @@ button{
   width: 100%;
   font-size: 40px;
   padding: 10px 15px;
+}
+
+.Modal{
+  z-index: 10;
 }
 
 .Modal, .Loading{

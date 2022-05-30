@@ -3,7 +3,7 @@ export const darkColors = {
 	color: "#ffffff",
 };
 export const lightColors = {
-	background: "#fffffff",
+	background: "#ffffff",
 	color: "#000000",
 };
 
