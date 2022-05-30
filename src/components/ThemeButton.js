@@ -1,5 +1,5 @@
-import {isDarkTheme} from "./utils/theme.js";
-import {darkColors, lightColors} from "./utils/theme.js";
+import {isDarkTheme} from "../utils/theme.js";
+import {darkColors, lightColors} from "../utils/theme.js";
 
 export default class ThemeButton {
 	constructor({$target}) {

@@ -1,10 +1,10 @@
-import SearchInput from "./SearchInput.js";
-import RandomButton from "./RandomButton.js";
-import ThemeButton from "./ThemeButton.js";
-import SearchResult from "./SearchResult.js";
-import Loading from "./Loading.js";
-import ImageInfo from "./ImageInfo.js";
-import {api} from "./api.js";
+import SearchInput from "./components/SearchInput.js";
+import RandomButton from "./components/RandomButton.js";
+import ThemeButton from "./components/ThemeButton.js";
+import SearchResult from "./components/SearchResult.js";
+import Loading from "./components/Loading.js";
+import ImageInfo from "./components/ImageInfo.js";
+import {api} from "./utils/api.js";
 
 export default class App {
 	$target = null;

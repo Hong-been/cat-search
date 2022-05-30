@@ -1,4 +1,4 @@
-import {imageLazyLoading} from "./utils/lazyLoad.js";
+import {imageLazyLoading} from "../utils/lazyLoad.js";
 
 export default class SearchResult {
 	$searchResult = null;
