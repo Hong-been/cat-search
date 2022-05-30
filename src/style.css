@@ -19,6 +19,12 @@ body * {
   font-family: Goyang;
 }
 
+input{
+  border-style:solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
 ul {
   padding: 0;
 }
@@ -28,6 +34,8 @@ li {
 }
 button{
   cursor: pointer;
+  border-style: none;
+  background-color: inherit;
 }
 *,
 *:before,
@@ -41,8 +49,24 @@ button{
   column-gap: 1.5em;
 }
 
+#header{
+  padding: 18px;
+}
+
 .SearchHeader {
   display: flex;
+}
+
+.searchHistory{
+  display: flex;
+}
+
+.searchHistory .searcedKeyword{
+  font-size: 18px;
+  margin-right: 10px;
+  padding : 3px 10px;
+  border-radius: 4px;
+  background-color: gray;
 }
 
 .SearchResult {
@@ -50,6 +74,7 @@ button{
   display: grid;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
   grid-gap: 10px;
+  padding: 0 30px;
 }
 
 .SearchResult img {
@@ -59,7 +84,6 @@ button{
 }
 
 .SearchResult .item {
-  background-color: gray;
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
@@ -115,13 +139,18 @@ button{
   border: 1px solid #eee;
   border-radius: 5px;
   width: 60%;
-  max-height: 700px;
-  overflow-y: scroll;
+  max-height: 900px;
+  overflow-y: auto;
+}
+
+.Modal .description{
+  font-size: larger;
 }
 
 .Modal .content-wrapper img,
 .Modal .content-wrapper p {
   width: 100%;
+  text-align: center;
 }
 @media screen and (max-width:992px){
   .SearchResult{

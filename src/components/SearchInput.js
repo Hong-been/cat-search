@@ -15,7 +15,7 @@ export default class SearchInput {
 
 		const $dataList = document.createElement("ul");
 		this.$dataList = $dataList;
-		this.$dataList.id = "searchOptions";
+		this.$dataList.classList.add("searchHistory");
 		$target.insertAdjacentElement("afterend", this.$dataList);
 		this.$dataList.addEventListener("click", (e) => {
 			const keyword = e.target.closest(".searcedKeyword");

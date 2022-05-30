@@ -29,14 +29,11 @@ export default class ImageInfo {
 		this.$imageInfo.innerHTML = `
         <dialog class="content-wrapper" open>
           <header class="title">
-            <span class="name"></span>
-            <button class="close">x</button>
+            <h2 class="name"></h2>
+            <button class="close">❌</button>
           </header>
           <img id="img"/>        
-          <ul class="description">
-            <li id="temperament"></li>
-            <li id="origin"></li>
-          </ul>
+          <ul class="description"></ul>
         </dialog>`;
 
 		const closeButton = this.$imageInfo.querySelector(".close");
@@ -63,10 +60,22 @@ export default class ImageInfo {
 			this.$imageInfo.querySelector(".name").innerText = name;
 			this.$imageInfo.querySelector("#img").src = url;
 			this.$imageInfo.querySelector("#img").alt = name;
-			this.$imageInfo.querySelector(
-				"#temperament"
-			).innerText = `성격: ${temperament}`;
-			this.$imageInfo.querySelector("#origin").innerText = `태생: ${origin}`;
+
+			const desc = this.$imageInfo.querySelector(".description");
+
+			const fragment = document.createDocumentFragment();
+
+			const li1 = document.createElement("li");
+			li1.innerText = `성격: ${temperament}`;
+
+			const li2 = document.createElement("li");
+			li2.innerText = `태생: ${origin}`;
+
+			fragment.appendChild(li1);
+			fragment.appendChild(li2);
+
+			desc.innerHTML = "";
+			desc.appendChild(fragment);
 
 			this.$imageInfo.style.display = "block";
 		} else {

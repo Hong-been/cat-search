@@ -9,8 +9,8 @@ import {api} from "./utils/api.js";
 export default class App {
 	$target = null;
 	state = {
-		data: window.sessionStorage.getItem("lastestResults")
-			? JSON.parse(window.sessionStorage.getItem("lastestResults"))
+		data: window.localStorage.getItem("lastestResults")
+			? JSON.parse(window.localStorage.getItem("lastestResults"))
 			: [],
 		searchedKeyword: [],
 	};
@@ -18,10 +18,14 @@ export default class App {
 	constructor($target) {
 		this.$target = $target;
 
-		const $searchHeader = document.createElement("header");
+		const $header = document.createElement("header");
+		$header.id = "header";
+		const $searchHeader = document.createElement("div");
 		this.$searchHeader = $searchHeader;
 		this.$searchHeader.className = "SearchHeader";
-		$target.appendChild(this.$searchHeader);
+
+		$header.appendChild(this.$searchHeader);
+		$target.appendChild($header);
 
 		const handleFetch = async (fetch) => {
 			try {
@@ -29,7 +33,7 @@ export default class App {
 				await fetch();
 			} catch (e) {
 				console.error(e);
-				alert("일시적으로 서버에 문제가 있습니다.");
+				alert("일시적으로 서버에 문제가 있습니다. 다시 시도해주세요!");
 			} finally {
 				this.loading.setState(false);
 			}
@@ -78,7 +82,7 @@ export default class App {
 								data: [],
 						  });
 
-					window.sessionStorage.setItem(
+					window.localStorage.setItem(
 						"lastestResults",
 						JSON.stringify(this.state.data)
 					);
