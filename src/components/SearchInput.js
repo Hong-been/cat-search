@@ -1,8 +1,10 @@
-const TEMPLATE = '<input type="text">';
-
 export default class SearchInput {
-	constructor({$target, initialData, onAddSearchedKeyword, onSearch}) {
+	constructor({$target, initialState, onAddSearchedKeyword, onSearch}) {
+		this.state = initialState;
+
+		const $searchForm = document.createElement("form");
 		const $searchInput = document.createElement("input");
+
 		this.$searchInput = $searchInput;
 		this.$searchInput.placeholder = "고양이를 검색해보세요. |";
 		this.$searchInput.autofocus = true;
@@ -11,48 +13,30 @@ export default class SearchInput {
 		});
 
 		$searchInput.className = "SearchInput";
-		$target.insertAdjacentElement("afterbegin", $searchInput);
+		$searchForm.appendChild($searchInput);
+		$target.insertAdjacentElement("afterbegin", $searchForm);
 
-		const $dataList = document.createElement("ul");
-		this.$dataList = $dataList;
-		this.$dataList.classList.add("searchHistory");
-		$target.insertAdjacentElement("afterend", this.$dataList);
-		this.$dataList.addEventListener("click", (e) => {
-			const keyword = e.target.closest(".searcedKeyword");
-			if (!keyword) return;
+		$searchForm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			// if (this.timer) clearTimeout(this.timer);
 
-			this.$searchInput.value = keyword.innerText;
-			onSearch(keyword.innerText);
+			// this.timer = setTimeout(() => {
+			// 	onAddSearchedKeyword(e.target.value);
+			// 	onSearch(e.target.value);
+			// }, 200);
+			const value = $searchInput.value;
+
+			onAddSearchedKeyword(value);
+			onSearch(value);
 		});
-
-		this.timer = null;
-		$searchInput.addEventListener("keydown", (e) => {
-			if (e.key !== "Enter") return;
-
-			if (this.timer) clearTimeout(this.timer);
-
-			this.timer = setTimeout(() => {
-				onAddSearchedKeyword(e.target.value);
-				onSearch(e.target.value);
-			}, 200);
-		});
-
-		this.data = initialData;
+		this.state = initialState;
 		this.render();
 	}
-	setState(nextData) {
-		this.data = nextData;
+	setState(nextState) {
+		this.state = nextState;
 		this.render();
 	}
-
 	render() {
-		this.$dataList.innerHTML = this.data
-			.map((word) => {
-				return `
-        <li class="searcedKeyword">
-          <button>${word}</button>
-        </li>`;
-			})
-			.join("");
+		this.$searchInput.value = this.state.currentKeyword;
 	}
 }
