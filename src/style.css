@@ -9,6 +9,17 @@
   --pc-width: 992px;
   --tablet-width: 768px;
   --mobile-width: 576px;
+
+  --main-blue: #2d59f0;
+  --main-red: #ff443b;
+  --pale-pink: #fdebef;
+  --dark-gray: #21242e;
+
+  --font-large: 24px;
+  --font-medium: 16px;
+  --font-small: 12px;
+
+  --modal-zindex: 10;
 }
 
 html {
@@ -22,6 +33,7 @@ html {
 
 body * {
   font-family: Goyang;
+  max-width: var(--pc-width);
 }
 
 ul {
@@ -35,7 +47,6 @@ button{
   cursor: pointer;
   border-style: none;
   background-color: inherit;
-
 }
 *,
 *:before,
@@ -49,6 +60,7 @@ button{
   column-gap: 1.5em;
 }
 
+/* header */
 #header{
   padding: 18px;
 }
@@ -67,13 +79,14 @@ button{
 }
 
 .searchHistory .searcedKeyword{
-  font-size: 18px;
+  font-size: var(--font-large);
   margin-right: 10px;
   padding : 3px 10px;
   border-radius: 4px;
   background-color: gray;
 }
 
+/* main */
 .SearchResult {
   margin-top: 10px;
   display: grid;
@@ -102,20 +115,21 @@ button{
   border-radius: 3px;
   background-color: rgba(125, 125, 125, 0.691);
   color: var(--color);
-  font-size: 1.25rem;
+  font-size: var(--font-large);
   padding: 5px 10px;
 }
 
 .SearchInput {
   width: 100%;
-  font-size: 40px;
+  font-size: 20px;
   padding: 10px 15px;
   border-style: none;
   border-bottom: 3px solid gray;
 }
 
+/* modal */
 .Modal{
-  z-index: 10;
+  z-index: var(--modal-zindex);
 }
 
 .Modal, .Loading{
@@ -146,12 +160,12 @@ button{
   border: 1px solid #eee;
   border-radius: 5px;
   width: 60%;
-  max-height: 900px;
+  max-height: 800px;
   overflow-y: auto;
 }
 
 .Modal .description{
-  font-size: larger;
+  font-size: var(--font-large);
 }
 
 .Modal .content-wrapper img,

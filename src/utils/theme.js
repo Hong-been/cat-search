@@ -1,10 +1,10 @@
 export const darkColors = {
-	background: "#000000",
+	background: "#060a10",
 	color: "#ffffff",
 };
 export const lightColors = {
-	background: "#ffffff",
-	color: "#000000",
+	background: "#eff0f2",
+	color: "#090b16",
 };
 
 export const isDarkTheme =
