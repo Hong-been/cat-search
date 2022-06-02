@@ -2,7 +2,7 @@ export default class RandomButton {
 	constructor({$target, onRandomClick}) {
 		const $randomButton = document.createElement("button");
 		this.$randomButton = $randomButton;
-		this.$randomButton.innerText = "랜덤 고양이 |";
+		this.$randomButton.innerText = "Random Cats";
 
 		$randomButton.className = "RandomButton";
 		$target.insertAdjacentElement("beforeend", $randomButton);

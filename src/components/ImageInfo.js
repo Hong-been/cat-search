@@ -30,7 +30,7 @@ export default class ImageInfo {
         <dialog class="content-wrapper" open>
           <header class="title">
             <h2 class="name"></h2>
-            <button class="close">❌</button>
+            <button class="close">🆇</button>
           </header>
           <img id="img"/>        
           <ul class="description"></ul>
@@ -66,10 +66,10 @@ export default class ImageInfo {
 			const fragment = document.createDocumentFragment();
 
 			const li1 = document.createElement("li");
-			li1.innerText = `성격: ${temperament}`;
+			li1.innerText = `Temperament: ${temperament}`;
 
 			const li2 = document.createElement("li");
-			li2.innerText = `태생: ${origin}`;
+			li2.innerText = `Origin: ${origin}`;
 
 			fragment.appendChild(li1);
 			fragment.appendChild(li2);

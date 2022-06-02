@@ -21,7 +21,7 @@ export default class Loading {
 		if (this.data) {
 			this.$loading.innerHTML = `
         <dialog class="content-wrapper" open>
-          <p class="title">데이터를 불러오고 있습니다 ┳</p>
+          <p class="title">🐈..🐈..🐈..</p>
         </dialog>`;
 			this.$loading.style.display = "block";
 		} else {

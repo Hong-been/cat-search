@@ -32,7 +32,7 @@ export default class SearchResult {
 		if (!this.data || !this.data.length) {
 			this.$searchResult.innerHTML = `
       <div class="item">
-        <p>검색결과가 없습니다.</p>
+        <p>Try to see other cats 🐈‍⬛</p>
       </div>`;
 
 			return;

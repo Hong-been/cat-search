@@ -17,7 +17,7 @@ export default class ThemeButton {
 	}
 
 	render() {
-		const message = this.state ? "라이트모드 |" : "다크모드 |";
+		const message = this.state ? "Light" : "Dark";
 		this.$themeToggle.innerText = message;
 
 		if (this.state) {
