@@ -29,8 +29,8 @@ export default class ImageInfo {
 		this.$imageInfo.innerHTML = `
         <dialog class="content-wrapper" open>
           <header class="title">
-            <h2 class="name"></h2>
-            <button class="close">🆇</button>
+            <h3 class="name"></h3>
+            <button class="close">𝗫</button>
           </header>
           <img id="img"/>        
           <ul class="description"></ul>

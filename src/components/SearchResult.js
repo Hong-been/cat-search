@@ -6,6 +6,7 @@ export default class SearchResult {
 	onClick = null;
 
 	constructor({$target, initialData, onClick}) {
+		this.initFlag = true;
 		this.$searchResult = document.createElement("ul");
 		this.$searchResult.className = "SearchResult";
 		$target.appendChild(this.$searchResult);
@@ -30,11 +31,14 @@ export default class SearchResult {
 
 	render() {
 		if (!this.data || !this.data.length) {
+			if (this.initFlag) {
+				this.initFlag = false;
+				this.$searchResult.innerHTML = ``;
+				return;
+			}
+			this.initFlag = false;
 			this.$searchResult.innerHTML = `
-      <div class="item">
-        <p>Try to see other cats 🐈‍⬛</p>
-      </div>`;
-
+      <p>No cats 🐈‍⬛</p>`;
 			return;
 		}
 

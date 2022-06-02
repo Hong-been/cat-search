@@ -21,7 +21,7 @@ export default class Loading {
 		if (this.data) {
 			this.$loading.innerHTML = `
         <dialog class="content-wrapper" open>
-          <p class="title">🐈..🐈..🐈..</p>
+          <p class="title">🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</p>
         </dialog>`;
 			this.$loading.style.display = "block";
 		} else {

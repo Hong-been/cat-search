@@ -19,7 +19,7 @@ export default class SearchHistory {
 			.map((word) => {
 				return `
         <li class="searcedKeyword">
-          <button>${word}</button>
+          <button class="searcedKeywordButton">${word}</button>
         </li>`;
 			})
 			.join("");
