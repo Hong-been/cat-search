@@ -17,11 +17,16 @@ export default class Header {
 		const $searchHeader = document.createElement("div");
 		$searchHeader.className = "SearchHeader";
 
-		$header.appendChild($searchHeader);
 		$target.appendChild($header);
 
-		this.themeButton = new ThemeButton({$target: $searchHeader});
+		this.themeButton = new ThemeButton({$target: $header});
 
+		this.randomButton = new RandomButton({
+			$target: $header,
+			onRandomClick,
+		});
+
+		$header.appendChild($searchHeader);
 		this.searchInput = new SearchInput({
 			$target: $searchHeader,
 			initialState: {currentKeyword: this.state.currentKeyword},
@@ -35,11 +40,6 @@ export default class Header {
 				});
 			},
 			onSearch,
-		});
-
-		this.randomButton = new RandomButton({
-			$target: $searchHeader,
-			onRandomClick,
 		});
 
 		this.searchHistory = new SearchHistory({

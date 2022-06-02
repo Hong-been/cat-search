@@ -64,7 +64,16 @@ button{
 }
 
 .SearchHeader form{
-  flex-basis: 70%;
+  flex-basis: 100%;
+}
+
+.SearchInput {
+  width: 100%;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-style: none;
+  border-radius: 10px;
+  background-color: var(--dark-gray);
 }
 
 .searchHistory{
@@ -110,14 +119,6 @@ button{
   color: var(--color);
   font-size: var(--font-large);
   padding: 5px 10px;
-}
-
-.SearchInput {
-  width: 100%;
-  font-size: 20px;
-  padding: 10px 15px;
-  border-style: none;
-  border-bottom: 3px solid gray;
 }
 
 /* modal */

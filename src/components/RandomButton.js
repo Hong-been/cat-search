@@ -5,7 +5,7 @@ export default class RandomButton {
 		this.$randomButton.innerText = "Random Cats";
 
 		$randomButton.className = "RandomButton";
-		$target.insertAdjacentElement("beforeend", $randomButton);
+		$target.appendChild($randomButton);
 
 		$randomButton.addEventListener("click", onRandomClick);
 	}
