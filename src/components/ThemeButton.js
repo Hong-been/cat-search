@@ -23,14 +23,9 @@ export default class ThemeButton {
 			: `<i class="fa-solid fa-moon moonIcon"></i>`;
 		this.$themeToggle.innerHTML = message;
 
-		if (this.state) {
-			for (const [key, value] of Object.entries(darkColors)) {
-				document.documentElement.style.setProperty(`--${key}`, `${value}`);
-			}
-		} else {
-			for (const [key, value] of Object.entries(lightColors)) {
-				document.documentElement.style.setProperty(`--${key}`, `${value}`);
-			}
+		const themeColors = this.state ? lightColors : darkColors;
+		for (const [key, value] of Object.entries(themeColors)) {
+			document.documentElement.style.setProperty(`--${key}`, `${value}`);
 		}
 	}
 }

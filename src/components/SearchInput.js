@@ -18,12 +18,6 @@ export default class SearchInput {
 
 		$searchForm.addEventListener("submit", (e) => {
 			e.preventDefault();
-			// if (this.timer) clearTimeout(this.timer);
-
-			// this.timer = setTimeout(() => {
-			// 	onAddSearchedKeyword(e.target.value);
-			// 	onSearch(e.target.value);
-			// }, 200);
 			const value = $searchInput.value;
 
 			onAddSearchedKeyword(value);
