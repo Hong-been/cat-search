@@ -1,15 +1,15 @@
-export default class Loading {
-	data = null;
+import BaseComponent from "./BaseComponent.js";
 
+export default class Loading extends BaseComponent {
 	constructor({$target, data}) {
-		const $loading = document.createElement("div");
-		$loading.className = "Modal";
-		this.$loading = $loading;
-		$target.appendChild($loading);
+		super(`
+			<div class="Modal">
+				<dialog class="content-wrapper"></dialog>
+			</div>
+		`);
 
-		this.data = data;
-
-		this.render();
+		$target.appendChild(this.$element);
+		this.setState(data);
 	}
 
 	setState(nextData) {
@@ -19,13 +19,12 @@ export default class Loading {
 
 	render() {
 		if (this.data) {
-			this.$loading.innerHTML = `
-        <dialog class="content-wrapper" open>
-          <p class="title">🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</p>
-        </dialog>`;
-			this.$loading.style.display = "block";
+			const $content = this.$element.querySelector(".content-wrapper");
+			$content.innerHTML = `<p class="title">🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</p>`;
+			$content.showModal();
+			this.$element.style.display = "block";
 		} else {
-			this.$loading.style.display = "none";
+			this.$element.style.display = "none";
 		}
 	}
 }
