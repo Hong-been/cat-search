@@ -1,12 +1,13 @@
-export default class RandomButton {
+import BaseComponent from "./BaseComponent.js";
+
+export default class RandomButton extends BaseComponent {
 	constructor({$target, onRandomClick}) {
-		const $randomButton = document.createElement("button");
-		this.$randomButton = $randomButton;
-		this.$randomButton.innerHTML = `<i class="fa-solid fa-shuffle shuffleIcon"></i>`;
+		super(`
+		<button class="RandomButton">
+			<i class="fa-solid fa-shuffle shuffleIcon"></i>
+		</button>`);
+		this.$element.addEventListener("click", onRandomClick);
 
-		$randomButton.className = "RandomButton";
-		$target.appendChild($randomButton);
-
-		$randomButton.addEventListener("click", onRandomClick);
+		$target.appendChild(this.$element);
 	}
 }

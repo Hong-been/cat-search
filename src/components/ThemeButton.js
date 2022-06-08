@@ -6,8 +6,8 @@ export default class ThemeButton extends BaseComponent {
 	constructor({$target}) {
 		super(`<button class="ThemeButton"></button>`);
 
-		$target.insertAdjacentElement("afterbegin", this.$element);
 		this.$element.addEventListener("click", () => this.setState(!this.state));
+		$target.appendChild(this.$element);
 		this.setState(isDarkTheme);
 	}
 	setState(newState) {
