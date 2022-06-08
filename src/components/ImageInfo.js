@@ -1,15 +1,26 @@
-export default class ImageInfo {
-	$imageInfo = null;
-	data = null;
+import BaseComponent from "./BaseComponent.js";
 
+export default class ImageInfo extends BaseComponent {
 	constructor({$target, data}) {
-		const $imageInfo = document.createElement("div");
-		$imageInfo.className = "Modal";
-		this.$imageInfo = $imageInfo;
-		$target.appendChild($imageInfo);
+		super(`
+			<div class="Modal">
+				<dialog class="content-wrapper">
+					<header class="title">
+						<h3 class="name"></h3>
+						<button class="CloseButton">
+							<i class="fa-solid fa-xmark closeIcon"></i>
+						</button>
+					</header>
+					<img class="image"/>        
+					<ul class="description"></ul>
+			</dialog>
+			</div>
+		`);
 
-		$imageInfo.addEventListener("click", (e) => {
-			if (e.target !== $imageInfo) return;
+		$target.appendChild(this.$element);
+
+		this.$element.addEventListener("click", (e) => {
+			if (e.target !== this.$element) return;
 
 			this.setState({
 				visible: false,
@@ -26,26 +37,16 @@ export default class ImageInfo {
 			}
 		});
 
-		this.$imageInfo.innerHTML = `
-        <dialog class="content-wrapper" open>
-          <header class="title">
-            <h3 class="name"></h3>
-            <button class="close">𝗫</button>
-          </header>
-          <img id="img"/>        
-          <ul class="description"></ul>
-        </dialog>`;
-
-		const closeButton = this.$imageInfo.querySelector(".close");
-		closeButton.addEventListener("click", () => {
+		const $closeButton = this.$element.querySelector(".CloseButton");
+		$closeButton.addEventListener("click", () => {
+			console.log($closeButton);
 			this.setState({
 				visible: false,
 				image: null,
 			});
 		});
 
-		this.data = data;
-		this.render();
+		this.setState(data);
 	}
 
 	setState(nextData) {
@@ -57,13 +58,11 @@ export default class ImageInfo {
 		if (this.data.visible) {
 			const {name, url, temperament, origin} = this.data.image;
 
-			this.$imageInfo.querySelector(".name").innerText = name;
-			this.$imageInfo.querySelector("#img").src = url;
-			this.$imageInfo.querySelector("#img").alt = name;
+			this.$element.querySelector(".name").innerText = name;
+			this.$element.querySelector(".image").src = url;
+			this.$element.querySelector(".image").alt = name;
 
-			const desc = this.$imageInfo.querySelector(".description");
-
-			const fragment = document.createDocumentFragment();
+			const desc = this.$element.querySelector(".description");
 
 			const li1 = document.createElement("li");
 			li1.innerText = `Temperament: ${temperament}`;
@@ -71,15 +70,19 @@ export default class ImageInfo {
 			const li2 = document.createElement("li");
 			li2.innerText = `Origin: ${origin}`;
 
+			desc.innerHTML = "";
+			const fragment = document.createDocumentFragment();
 			fragment.appendChild(li1);
 			fragment.appendChild(li2);
-
-			desc.innerHTML = "";
 			desc.appendChild(fragment);
 
-			this.$imageInfo.style.display = "block";
+			const $content = this.$element.querySelector(".content-wrapper");
+			$content.showModal();
+			this.$element.style.display = "block";
 		} else {
-			this.$imageInfo.style.display = "none";
+			const $content = this.$element.querySelector(".content-wrapper");
+			$content.close();
+			this.$element.style.display = "none";
 		}
 	}
 }

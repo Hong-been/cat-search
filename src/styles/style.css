@@ -5,7 +5,7 @@
 }
 
 /* Icon */
-.sunIcon, .moonIcon, .shuffleIcon{
+.sunIcon, .moonIcon, .shuffleIcon, .closeIcon{
   color: var(--light-gray)
 }
 
@@ -62,7 +62,8 @@
 }
 
 .RandomButton, 
-.ThemeButton{
+.ThemeButton,
+.CloseButton{
   padding: 8px 10px;
   border-radius: 10px;
   background-color: var(--main-blue);
@@ -70,7 +71,8 @@
   margin-bottom: 30px;
 }
 .RandomButton:hover, 
-.ThemeButton:hover{
+.ThemeButton:hover,
+.CloseButton:hover{
   background-color: var(--main-blue-hover)
 }
 
