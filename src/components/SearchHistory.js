@@ -1,11 +1,11 @@
-export default class SearchHistory {
-	constructor({$target, initialState, onKeywordClick}) {
-		const $dataList = document.createElement("ul");
-		this.$dataList = $dataList;
-		this.$dataList.classList.add("searchHistory");
-		$target.appendChild(this.$dataList);
+import BaseComponent from "./BaseComponent.js";
 
-		this.$dataList.addEventListener("click", onKeywordClick);
+export default class SearchHistory extends BaseComponent {
+	constructor({$target, initialState, onKeywordClick}) {
+		super(`<ul class="searchHistory"></ul>`);
+
+		$target.appendChild(this.$element);
+		this.$element.addEventListener("click", onKeywordClick);
 
 		this.state = initialState;
 		this.render();
@@ -15,7 +15,7 @@ export default class SearchHistory {
 		this.render();
 	}
 	render() {
-		this.$dataList.innerHTML = this.state.history
+		this.$element.innerHTML = this.state.history
 			.map((word) => {
 				return `
         <li class="searcedKeyword">

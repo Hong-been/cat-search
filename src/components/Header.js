@@ -2,36 +2,35 @@ import RandomButton from "./RandomButton.js";
 import ThemeButton from "./ThemeButton.js";
 import SearchInput from "./SearchInput.js";
 import SearchHistory from "./SearchHistory.js";
+import BaseComponent from "./BaseComponent.js";
 
 const HISTORY_LIMIT = 10;
 
-export default class Header {
+export default class Header extends BaseComponent {
 	constructor({$target, onSearch, onRandomClick}) {
+		super(`
+			<header id="Header">
+				<div class="Buttons"></div>
+				<h1 class="HeaderTitle">Get Your Cats 🐈</h1>
+				<div class="SearchHeader"></div>
+			</header>
+		`);
+
 		this.state = {
 			currentKeyword: "",
 			searchedKeywords: window.localStorage.getItem("history").split(",") || [],
 		};
 
-		const $header = document.createElement("header");
-		$header.id = "Header";
-		const $searchHeader = document.createElement("div");
-		$searchHeader.className = "SearchHeader";
+		$target.appendChild(this.$element);
 
-		$target.appendChild($header);
-
-		this.themeButton = new ThemeButton({$target: $header});
-
+		const $buttons = this.$element.querySelector(".Buttons");
+		this.themeButton = new ThemeButton({$target: $buttons});
 		this.randomButton = new RandomButton({
-			$target: $header,
+			$target: $buttons,
 			onRandomClick,
 		});
 
-		const $h1 = document.createElement("h1");
-		$h1.classList.add("HeaderTitle");
-		$h1.innerText = "Get Your Cats 🐈";
-		$header.appendChild($h1);
-
-		$header.appendChild($searchHeader);
+		const $searchHeader = this.$element.querySelector(".SearchHeader");
 		this.searchInput = new SearchInput({
 			$target: $searchHeader,
 			initialState: {currentKeyword: this.state.currentKeyword},
@@ -51,7 +50,7 @@ export default class Header {
 		});
 
 		this.searchHistory = new SearchHistory({
-			$target: $header,
+			$target: this.$element,
 			initialState: {history: this.state.searchedKeywords},
 			onKeywordClick: (e) => {
 				const keyword = e.target.closest(".searcedKeywordButton");
