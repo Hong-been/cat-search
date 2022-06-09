@@ -20,11 +20,13 @@ export default class Loading extends BaseComponent {
 	}
 
 	render() {
+		const $content = this.$element.querySelector(".content-wrapper");
+
 		if (this.data) {
-			const $content = this.$element.querySelector(".content-wrapper");
 			$content.showModal();
 			this.$element.style.display = "block";
 		} else {
+			$content.close();
 			this.$element.style.display = "none";
 		}
 	}

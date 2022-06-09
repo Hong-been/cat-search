@@ -55,6 +55,8 @@ export default class ImageInfo extends BaseComponent {
 	}
 
 	render() {
+		const $content = this.$element.querySelector(".content-wrapper");
+
 		if (this.data.visible) {
 			const {name, url, temperament, origin} = this.data.image;
 
@@ -76,11 +78,9 @@ export default class ImageInfo extends BaseComponent {
 			fragment.appendChild(li2);
 			desc.appendChild(fragment);
 
-			const $content = this.$element.querySelector(".content-wrapper");
 			$content.showModal();
 			this.$element.style.display = "block";
 		} else {
-			const $content = this.$element.querySelector(".content-wrapper");
 			$content.close();
 			this.$element.style.display = "none";
 		}

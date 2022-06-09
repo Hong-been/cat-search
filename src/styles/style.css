@@ -11,7 +11,7 @@
 
 /* header */
 #Header{
-  padding: 80px 18px 160px 18px;
+  padding: 80px 18px 100px 18px;
   border-radius: 10px;
   position: sticky;
   z-index: var(--header-zindex);
@@ -43,12 +43,14 @@
 
 .searchHistory{
   display: flex;
+  flex-wrap: wrap;
   margin-top: 40px;
 }
 
 .searchHistory .searcedKeyword{
   font-size: var(--font-medium);
-  margin-right: 10px;
+  height: fit-content;
+  margin: 0 10px 10px 0;
   border-radius: 8px;
   background-color: var(--main-blue);
 }

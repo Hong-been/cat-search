@@ -1,18 +1,16 @@
 import {imageLazyLoading} from "../utils/lazyLoad.js";
+import BaseComponent from "./BaseComponent.js";
 
-export default class SearchResult {
-	$searchResult = null;
-	data = null;
-	onClick = null;
-
+export default class SearchResult extends BaseComponent {
 	constructor({$target, initialData, onClick}) {
+		super(`
+		<main>
+			<ul class="SearchResult"></ul>
+		</main>
+		`);
 		this.initFlag = true;
-		this.$searchResult = document.createElement("ul");
-		this.$searchResult.className = "SearchResult";
-		$target.appendChild(this.$searchResult);
 
-		this.data = initialData;
-
+		this.$searchResult = this.$element.querySelector(".SearchResult");
 		this.$searchResult.addEventListener("click", (e) => {
 			const item = e.target.closest(".item");
 			if (!item) return;
@@ -21,7 +19,8 @@ export default class SearchResult {
 			onClick(this.data[index]);
 		});
 
-		this.render();
+		$target.appendChild(this.$element);
+		this.setState(initialData);
 	}
 
 	setState(nextData) {
@@ -37,24 +36,23 @@ export default class SearchResult {
 				return;
 			}
 			this.initFlag = false;
-			this.$searchResult.innerHTML = `
-      <p>No cats 🐈‍⬛</p>`;
-			return;
+			this.$searchResult.innerHTML = `<p>No cats 🐈‍⬛</p>`;
+		} else {
+			this.$searchResult.innerHTML = this.data
+				.map(
+					(cat, index) =>
+						`<li 
+					class="item" 
+					data-index=${index} 
+					data-url=${cat.url} 
+					tooltip=${cat.name.split(" ").join("")}}>
+          <img src="" alt=${cat.name.split(" ").join("")} />
+        </ul>
+			`
+				)
+				.join("");
+
+			imageLazyLoading(this.$searchResult.querySelectorAll(".item"));
 		}
-
-		this.$searchResult.innerHTML = this.data
-			.map(
-				(cat, index) => `
-          <li class="item" data-index=${index} data-url=${
-					cat.url
-				} tooltip=${cat.name.split(" ").join("")}
-				}>
-            <img src="" alt=${cat.name.split(" ").join("")} />
-          </ul>
-        `
-			)
-			.join("");
-
-		imageLazyLoading(this.$searchResult.querySelectorAll(".item"));
 	}
 }

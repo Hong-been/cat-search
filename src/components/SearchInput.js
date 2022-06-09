@@ -1,30 +1,25 @@
-export default class SearchInput {
+import BaseComponent from "./BaseComponent.js";
+
+export default class SearchInput extends BaseComponent {
 	constructor({$target, initialState, onAddSearchedKeyword, onSearch}) {
-		this.state = initialState;
+		super(`
+			<form>
+				<input type="text" placeholder="Search Cats 🐈" autofocus class="SearchInput">
+		</form>
+		`);
 
-		const $searchForm = document.createElement("form");
-		const $searchInput = document.createElement("input");
-
-		this.$searchInput = $searchInput;
-		this.$searchInput.placeholder = "Search";
-		this.$searchInput.autofocus = true;
-		this.$searchInput.addEventListener("click", () => {
-			this.$searchInput.value = "";
-		});
-
-		$searchInput.className = "SearchInput";
-		$searchForm.appendChild($searchInput);
-		$target.insertAdjacentElement("afterbegin", $searchForm);
-
-		$searchForm.addEventListener("submit", (e) => {
+		this.$searchInput = this.$element.querySelector(".SearchInput");
+		this.$element.addEventListener("submit", (e) => {
 			e.preventDefault();
-			const value = $searchInput.value;
+
+			const value = this.$searchInput.value;
 
 			onAddSearchedKeyword(value);
 			onSearch(value);
 		});
-		this.state = initialState;
-		this.render();
+
+		$target.appendChild(this.$element);
+		this.setState(initialState);
 	}
 	setState(nextState) {
 		this.state = nextState;
