@@ -42,10 +42,7 @@ export default class App {
 								data: [],
 						  });
 
-					window.localStorage.setItem(
-						"lastestResults",
-						JSON.stringify(this.state.data)
-					);
+					window.localStorage.setItem("lastestResults", JSON.stringify(data));
 				});
 			},
 			onRandomClick: async () => {
@@ -55,6 +52,8 @@ export default class App {
 						...this.state,
 						data,
 					});
+
+					window.localStorage.setItem("lastestResults", JSON.stringify(data));
 				});
 			},
 		});
