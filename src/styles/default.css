@@ -43,13 +43,6 @@ input{
   color: var(--dark-gray)
 }
 
-button{
-  cursor: pointer;
-  border-style: none;
-  background-color: inherit;
-  color: var(--color);
-}
-
 *,
 *:before,
 *:after {

@@ -5,7 +5,7 @@ export default class ImageInfo extends BaseModal {
 		super(`
 			<header class="title">
 			<h3 class="name"></h3>
-			<button class="CloseButton">
+			<button class="blueSquire closeButton">
 				<i class="fa-solid fa-xmark closeIcon"></i>
 			</button>
 			</header>
@@ -33,7 +33,7 @@ export default class ImageInfo extends BaseModal {
 			}
 		});
 
-		const $closeButton = this.$element.querySelector(".CloseButton");
+		const $closeButton = this.$element.querySelector(".closeButton");
 		$closeButton.addEventListener("click", () => {
 			this.setState({
 				visible: false,

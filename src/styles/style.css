@@ -48,33 +48,7 @@
 }
 
 .searchHistory .searcedKeyword{
-  font-size: var(--font-medium);
-  height: fit-content;
   margin: 0 10px 10px 0;
-  border-radius: 8px;
-  background-color: var(--main-blue);
-}
-.searchHistory .searcedKeyword button{
-  color: var(--light-gray);
-  padding : 8px 16px;
-  border-radius: 8px;
-}
-.searchHistory .searcedKeyword:hover{
-  background-color: var(--main-blue-hover);
-}
-
-.RandomButton, 
-.ThemeButton,
-.CloseButton{
-  padding: 8px;
-  border-radius: 10px;
-  background-color: var(--main-blue);
-  margin-right: 2px;
-}
-.RandomButton:hover, 
-.ThemeButton:hover,
-.CloseButton:hover{
-  background-color: var(--main-blue-hover)
 }
 
 /* main */

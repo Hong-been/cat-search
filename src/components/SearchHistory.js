@@ -20,7 +20,7 @@ export default class SearchHistory extends BaseComponent {
 					.map((word) => {
 						return `
         <li class="searcedKeyword">
-          <button class="searcedKeywordButton">${word}</button>
+          <button class="searcedKeywordButton blueSquire">${word}</button>
         </li>`;
 					})
 					.join("")

@@ -1,6 +1,6 @@
-import BaseModal from "./BaseModal.js";
+import BaseComponent from "./BaseComponent.js";
 
-export default class Loading extends BaseModal {
+export default class Loading extends BaseComponent {
 	constructor({$target, data}) {
 		super(`
 			<div class="title">Getting🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</div>

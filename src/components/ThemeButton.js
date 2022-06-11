@@ -4,7 +4,7 @@ import BaseComponent from "./BaseComponent.js";
 
 export default class ThemeButton extends BaseComponent {
 	constructor({$target}) {
-		super(`<button class="ThemeButton"></button>`);
+		super(`<button class="blueSquire"></button>`);
 
 		this.$element.addEventListener("click", () => this.setState(!this.state));
 		$target.appendChild(this.$element);

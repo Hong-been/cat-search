@@ -1,0 +1,24 @@
+button{
+  cursor: pointer;
+  border-style: none;
+  background-color: inherit;
+}
+
+button.blueSquire{
+  padding: 8px;
+  border-radius: 10px;
+  background-color: var(--main-blue);
+  color: var(--light-gray);
+  margin-right: 4px;
+  font-size: var(--font-medium);
+  height: fit-content;
+}
+
+button.blueSquire:hover{
+  background-color: var(--main-blue-hover)
+}
+
+button i {
+  width: 16px;
+  height: 16px;
+}
