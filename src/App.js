@@ -21,7 +21,9 @@ export default class App {
 				await fetch();
 			} catch (e) {
 				console.error(e);
-				alert("일시적으로 문제가 발생했습니다. 다시 시도해주세요!");
+				if (confirm("일시적으로 문제가 발생했습니다. 다시 시도할까요?")) {
+					return await this.handleFetch(fetch);
+				}
 			} finally {
 				this.loading.setState(false);
 			}

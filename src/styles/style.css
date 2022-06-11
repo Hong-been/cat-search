@@ -131,17 +131,6 @@
   background-color: rgba(12, 12, 12, 0.8);
 }
 
-.Modal .title {
-  display: flex;
-  justify-content: space-between;
-}
-
-.Modal .title,
-.Modal .description {
-  padding: 5px;
-  align-items: center;
-}
-
 .Modal .content-wrapper {
   position: absolute;
   left: 50%;
@@ -152,8 +141,24 @@
   border-radius: 5px;
   width: 80%;
   max-height: 800px;
+  min-height: 200px;
   overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.Modal .content-wrapper .title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Modal .content-wrapper .title,
+.Modal .content-wrapper .description {
+  padding: 5px;
+  align-items: center;
+}
+
 
 .Modal .description{
   font-size: var(--font-medium);
@@ -168,13 +173,19 @@
   content: "📍 ";
 }
 
-.Modal .content-wrapper .image,
-.Modal .content-wrapper .title {
+.Modal .content-wrapper .image{
   padding: 0 10px;
   max-height: 600px;
   width: 100%;
   text-align: center;
 }
+
+.Modal .content-wrapper .title{
+  max-height: 600px;
+  padding: 20px;
+  text-align: center;
+}
+
 @media screen and (max-width:992px){
   .SearchResult{
     grid-template-columns: repeat(3, minmax(250px, 1fr));

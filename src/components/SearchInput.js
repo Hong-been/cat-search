@@ -9,6 +9,9 @@ export default class SearchInput extends BaseComponent {
 		`);
 
 		this.$searchInput = this.$element.querySelector(".SearchInput");
+		this.$searchInput.addEventListener("click", () => {
+			this.$searchInput.value = "";
+		});
 		this.$element.addEventListener("submit", (e) => {
 			e.preventDefault();
 
