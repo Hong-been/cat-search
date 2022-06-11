@@ -1,8 +1,8 @@
+import BaseComponent from "./BaseComponent.js";
 import RandomButton from "./RandomButton.js";
 import ThemeButton from "./ThemeButton.js";
 import SearchInput from "./SearchInput.js";
 import SearchHistory from "./SearchHistory.js";
-import BaseComponent from "./BaseComponent.js";
 
 const HISTORY_LIMIT = 10;
 

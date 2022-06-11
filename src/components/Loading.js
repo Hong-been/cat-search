@@ -3,7 +3,7 @@ import BaseModal from "./BaseModal.js";
 export default class Loading extends BaseModal {
 	constructor({$target, data}) {
 		super(`
-			<div class="title">Getting Cats....🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</div>
+			<div class="title">Getting🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</div>
 		`);
 
 		$target.appendChild(this.$element);

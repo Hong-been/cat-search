@@ -2,21 +2,18 @@ import {imageLazyLoading} from "../utils/lazyLoad.js";
 import BaseComponent from "./BaseComponent.js";
 
 export default class SearchResult extends BaseComponent {
-	constructor({$target, initialData, onClick}) {
+	constructor({$target, initialData, onImageClick}) {
 		super(`
-		<main>
-			<ul class="SearchResult"></ul>
-		</main>
+		<ul class="SearchResult"></ul>
 		`);
 		this.initFlag = true;
 
-		this.$searchResult = this.$element.querySelector(".SearchResult");
-		this.$searchResult.addEventListener("click", (e) => {
+		this.$element.addEventListener("click", (e) => {
 			const item = e.target.closest(".item");
 			if (!item) return;
 
 			const {index} = item.dataset;
-			onClick(this.data[index]);
+			onImageClick(this.data[index]);
 		});
 
 		$target.appendChild(this.$element);
@@ -32,13 +29,13 @@ export default class SearchResult extends BaseComponent {
 		if (!this.data || !this.data.length) {
 			if (this.initFlag) {
 				this.initFlag = false;
-				this.$searchResult.innerHTML = ``;
+				this.$element.innerHTML = ``;
 				return;
 			}
 			this.initFlag = false;
-			this.$searchResult.innerHTML = `<p>No cats 🐈‍⬛</p>`;
+			this.$element.innerHTML = `<p>No cats 🐈‍⬛</p>`;
 		} else {
-			this.$searchResult.innerHTML = this.data
+			this.$element.innerHTML = this.data
 				.map(
 					(cat, index) =>
 						`<li 
@@ -52,7 +49,7 @@ export default class SearchResult extends BaseComponent {
 				)
 				.join("");
 
-			imageLazyLoading(this.$searchResult.querySelectorAll(".item"));
+			imageLazyLoading(this.$element.querySelectorAll(".item"));
 		}
 	}
 }

@@ -140,15 +140,19 @@
   border: 1px solid var(--dark-gray);
   border-radius: 5px;
   width: 80%;
-  max-height: 800px;
+  height: 80%;
   min-height: 200px;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .Modal .content-wrapper .title {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -173,18 +177,17 @@
   content: "📍 ";
 }
 
-.Modal .content-wrapper .image{
-  padding: 0 10px;
-  max-height: 600px;
-  width: 100%;
-  text-align: center;
-}
-
 .Modal .content-wrapper .title{
-  max-height: 600px;
   padding: 20px;
   text-align: center;
 }
+
+.Modal .content-wrapper .image{
+  padding: 0 10px;
+  max-height: 400px;
+  text-align: center;
+}
+
 
 @media screen and (max-width:992px){
   .SearchResult{
@@ -197,7 +200,7 @@
   }
   .Modal .content-wrapper{
     width: 100%;
-    max-height: 80%;
+    height: 80%;
   }
 }
 @media screen and (max-width:576px){

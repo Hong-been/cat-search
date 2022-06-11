@@ -1,5 +1,5 @@
 import Header from "./components/Header.js";
-import SearchResult from "./components/SearchResult.js";
+import Main from "./components/Main.js";
 import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
 import {api} from "./utils/api.js";
@@ -60,10 +60,10 @@ export default class App {
 			},
 		});
 
-		this.searchResult = new SearchResult({
+		this.$main = new Main({
 			$target,
 			initialData: this.state.data,
-			onClick: async (image) => {
+			onImageClick: async (image) => {
 				handleFetch(async () => {
 					const {data} = await api.fetchCatById(image.id);
 
