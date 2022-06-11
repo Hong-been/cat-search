@@ -45,7 +45,7 @@ export default class SearchResult extends BaseComponent {
 					class="item" 
 					data-index=${index} 
 					data-url=${cat.url} 
-					tooltip=${cat.name.split(" ").join("")}}>
+					tooltip=${cat.name.split(" ").join("")}>
           <img src="" alt=${cat.name.split(" ").join("")} />
         </ul>
 			`

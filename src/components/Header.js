@@ -18,7 +18,9 @@ export default class Header extends BaseComponent {
 
 		this.state = {
 			currentKeyword: "",
-			searchedKeywords: window.localStorage.getItem("history").split(",") || [],
+			searchedKeywords: window.localStorage.getItem("history")
+				? window.localStorage.getItem("history").split(",")
+				: [],
 		};
 
 		$target.appendChild(this.$element);

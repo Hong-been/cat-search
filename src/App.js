@@ -59,11 +59,6 @@ export default class App {
 			},
 		});
 
-		this.loading = new Loading({
-			$target,
-			data: false,
-		});
-
 		this.searchResult = new SearchResult({
 			$target,
 			initialData: this.state.data,
@@ -77,6 +72,11 @@ export default class App {
 					});
 				});
 			},
+		});
+
+		this.loading = new Loading({
+			$target,
+			data: false,
 		});
 
 		this.imageInfo = new ImageInfo({

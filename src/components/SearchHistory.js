@@ -16,12 +16,14 @@ export default class SearchHistory extends BaseComponent {
 	}
 	render() {
 		this.$element.innerHTML = this.state.history
-			.map((word) => {
-				return `
+			? this.state.history
+					.map((word) => {
+						return `
         <li class="searcedKeyword">
           <button class="searcedKeywordButton">${word}</button>
         </li>`;
-			})
-			.join("");
+					})
+					.join("")
+			: `<div>Try to search cats!</div>`;
 	}
 }

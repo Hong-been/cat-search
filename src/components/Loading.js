@@ -1,13 +1,9 @@
-import BaseComponent from "./BaseComponent.js";
+import BaseModal from "./BaseModal.js";
 
-export default class Loading extends BaseComponent {
+export default class Loading extends BaseModal {
 	constructor({$target, data}) {
 		super(`
-			<div class="Modal">
-				<dialog class="content-wrapper">
-					<p class="title">🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</p>
-				</dialog>
-			</div>
+			<h3 class="title">🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</h3>
 		`);
 
 		$target.appendChild(this.$element);
@@ -20,14 +16,14 @@ export default class Loading extends BaseComponent {
 	}
 
 	render() {
-		const $content = this.$element.querySelector(".content-wrapper");
+		this.$content = this.$element.querySelector(".content-wrapper");
 
 		if (this.data) {
-			$content.showModal();
-			this.$element.style.display = "block";
+			this.$element.classList.remove("fadeOut");
+			this.$element.classList.add("fadeIn");
 		} else {
-			$content.close();
-			this.$element.style.display = "none";
+			this.$element.classList.remove("fadeIn");
+			this.$element.classList.add("fadeOut");
 		}
 	}
 }
