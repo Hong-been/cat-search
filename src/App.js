@@ -21,9 +21,7 @@ export default class App {
 				await fetch();
 			} catch (e) {
 				console.error(e);
-				if (confirm("일시적으로 문제가 발생했습니다. 다시 시도할까요?")) {
-					return await this.handleFetch(fetch);
-				}
+				alert("일시적으로 문제가 발생했습니다. 잠시 뒤 다시 시도해주세요.");
 			} finally {
 				this.loading.setState(false);
 			}
@@ -60,7 +58,7 @@ export default class App {
 			},
 		});
 
-		this.$main = new Main({
+		this.main = new Main({
 			$target,
 			initialData: this.state.data,
 			onImageClick: async (image) => {
@@ -91,6 +89,6 @@ export default class App {
 
 	setState(nextData) {
 		this.state = nextData;
-		this.searchResult.setState(this.state.data);
+		this.main.setState(nextData.data);
 	}
 }

@@ -12,5 +12,15 @@ export default class Main extends BaseComponent {
 			initialData,
 			onImageClick,
 		});
+
+		this.setState(initialData);
+	}
+	setState(nextState) {
+		this.state = nextState;
+		this.render();
+	}
+
+	render() {
+		this.searchResult.setState(this.state);
 	}
 }

@@ -1,9 +1,12 @@
-import BaseComponent from "./BaseComponent.js";
+import BaseModal from "./BaseModal.js";
 
-export default class Loading extends BaseComponent {
+export default class Loading extends BaseModal {
 	constructor({$target, data}) {
 		super(`
-			<div class="title">Getting🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</div>
+			<div class="loading">
+				<span class="loader"></span>
+				<span>Getting🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</span>
+			</div>
 		`);
 
 		$target.appendChild(this.$element);
