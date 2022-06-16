@@ -56,11 +56,6 @@ export default class ImageInfo extends BaseModal {
 		const $image = this.$element.querySelector(".image");
 		const $desc = this.$element.querySelector(".description");
 
-		$name.innerText = "";
-		$image.src = "";
-		$image.alt = "";
-		$desc.innerHTML = "";
-
 		if (this.data.visible) {
 			const {name, url, temperament, origin} = this.data.image;
 
@@ -84,6 +79,9 @@ export default class ImageInfo extends BaseModal {
 		} else {
 			this.$element.classList.remove("fadeIn");
 			this.$element.classList.add("fadeOut");
+
+			$name.innerText = "";
+			$desc.innerHTML = "";
 		}
 	}
 }
