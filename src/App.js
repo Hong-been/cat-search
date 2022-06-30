@@ -1,94 +1,83 @@
+import BaseComponent from "./core/Component.js";
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
 import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
+import {loadingStore, modalStore} from "./stores/index.js";
 import {api} from "./utils/api.js";
+import {setLocalStorage, getLocalStorage} from "./utils/index.js";
 
-export default class App {
-	$target = null;
-	state = {
-		data: window.localStorage.getItem("lastestResults")
-			? JSON.parse(window.localStorage.getItem("lastestResults"))
-			: [],
-	};
+export default class App extends BaseComponent {
+	constructor(target) {
+		super(target);
 
-	constructor($target) {
-		this.$target = $target;
+		const lastest = getLocalStorage("lastestResults");
+		this.setState({
+			data: lastest ? JSON.parse(lastest) : [],
+		});
+	}
 
+	componentDidMount() {
 		const handleFetch = async (fetch) => {
 			try {
-				this.loading.setState(true);
+				loadingStore.setState({isLoading: true});
+				// this.loading.setState(true);
 				await fetch();
 			} catch (e) {
 				console.error(e);
 				alert("일시적으로 문제가 발생했습니다. 잠시 뒤 다시 시도해주세요.");
 			} finally {
-				this.loading.setState(false);
+				loadingStore.setState({isLoading: false});
+				// this.loading.setState(false);
 			}
 		};
 
-		this.header = new Header({
-			$target,
+		const headerRoot = document.querySelector("#header");
+		const mainRoot = document.querySelector("#main");
+		const loadingModalRoot = document.querySelector("#loadingModal");
+		const imageModalRoot = document.querySelector("#imageModal");
+		// 검색히스토리가 두개씩 나와요.. debounce 필요
+
+		new Header(headerRoot, {
 			onSearch: async (keyword) => {
 				handleFetch(async () => {
 					const {data} = await api.fetchCats(keyword);
-					data
-						? this.setState({
-								...this.state,
-								data,
-						  })
-						: this.setState({
-								...this.state,
-								data: [],
-						  });
+					data ? this.setState({data}) : this.setState({data: []});
 
-					window.localStorage.setItem("lastestResults", JSON.stringify(data));
+					setLocalStorage("lastestResults", JSON.stringify(data));
 				});
 			},
 			onRandomClick: async () => {
 				handleFetch(async () => {
 					const {data} = await api.fetchRandom50();
-					this.setState({
-						...this.state,
-						data,
-					});
+					this.setState({data});
 
-					window.localStorage.setItem("lastestResults", JSON.stringify(data));
+					setLocalStorage("lastestResults", JSON.stringify(data));
 				});
 			},
 		});
 
-		this.main = new Main({
-			$target,
-			initialData: this.state.data,
+		new Main(mainRoot, {
+			results: this.state.data,
 			onImageClick: async (image) => {
 				handleFetch(async () => {
 					const {data} = await api.fetchCatById(image.id);
-
-					this.imageInfo.setState({
-						visible: true,
-						image: data,
-					});
+					modalStore.setState({isModalShow: true, image: data});
 				});
 			},
 		});
 
-		this.loading = new Loading({
-			$target,
-			data: false,
-		});
-
-		this.imageInfo = new ImageInfo({
-			$target,
-			data: {
-				visible: false,
-				image: null,
-			},
-		});
+		new Loading(loadingModalRoot);
+		new ImageInfo(imageModalRoot);
 	}
 
-	setState(nextData) {
-		this.state = nextData;
-		this.main.setState(nextData.data);
+	template() {
+		return `
+		<div id="root">
+			<header id="header"></header>
+			<main id="main"></main>
+			<div id="loadingModal"></div>
+			<div id="imageModal"></div>
+		</div>`;
 	}
 }

@@ -1,32 +1,29 @@
-import BaseModal from "./BaseModal.js";
+import BaseComponent from "../core/Component.js";
+import {loadingStore} from "../stores/index.js";
+import {ScrollController} from "../utils/scrollController.js";
 
-export default class Loading extends BaseModal {
-	constructor({$target, data}) {
-		super(`
-			<div class="loading">
-				<span class="loader"></span>
-				<span>Getting🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈 🐈‍⬛ 🐈</span>
-			</div>
-		`);
-
-		$target.appendChild(this.$element);
-		this.setState(data);
+export default class Loading extends BaseComponent {
+	constructor(target, props) {
+		super(target, props);
+		loadingStore.subscribe(this.render.bind(this));
 	}
 
-	setState(nextData) {
-		this.data = nextData;
-		this.render();
-	}
-
-	render() {
-		this.$content = this.$element.querySelector(".content-wrapper");
-
-		if (this.data) {
-			this.$element.classList.remove("fadeOut");
-			this.$element.classList.add("fadeIn");
+	componentDidMount() {
+		if (loadingStore.state.isLoading) {
+			ScrollController.blockScroll();
 		} else {
-			this.$element.classList.remove("fadeIn");
-			this.$element.classList.add("fadeOut");
+			ScrollController.nonBlockScroll();
 		}
+	}
+
+	template() {
+		return loadingStore.state.isLoading
+			? `
+			<div class="Modal">
+				<div class="loading">
+					<span class="loader"></span>
+				</div>	
+			</div>`
+			: ``;
 	}
 }
