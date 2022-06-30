@@ -1,26 +1,15 @@
-import BaseComponent from "./BaseComponent.js";
+import BaseComponent from "../core/Component.js";
 import SearchResult from "./SearchResult.js";
 
 export default class Main extends BaseComponent {
-	constructor({$target, initialData, onImageClick}) {
-		super(`<main></main>`);
+	constructor(target, props) {
+		super(target, props);
+	}
 
-		$target.appendChild(this.$element);
-
-		this.searchResult = new SearchResult({
-			$target: this.$element,
-			initialData,
-			onImageClick,
+	componentDidMount() {
+		new SearchResult(this.element, {
+			results: this.props.results,
+			onImageClick: this.props.onImageClick,
 		});
-
-		this.setState(initialData);
-	}
-	setState(nextState) {
-		this.state = nextState;
-		this.render();
-	}
-
-	render() {
-		this.searchResult.setState(this.state);
 	}
 }
