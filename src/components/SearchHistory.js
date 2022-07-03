@@ -3,6 +3,9 @@ import BaseComponent from "../core/Component.js";
 export default class SearchHistory extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+	}
+
+	initialState() {
 		this.setState({history: this.props.history});
 	}
 

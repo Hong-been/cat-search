@@ -9,7 +9,9 @@ const HISTORY_LIMIT = 10;
 export default class Header extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+	}
 
+	initialState() {
 		const storageHistory = getLocalStorage("history");
 		this.setState({
 			currentKeyword: "",
@@ -55,7 +57,7 @@ export default class Header extends BaseComponent {
 	template() {
 		return `
 			<div class="Buttons"></div>
-			<h1 class="HeaderTitle">Get Your Cats 🐈</h1>
+			<h1 class="HeaderTitle">Search Cats 🐈</h1>
 			<div class="SearchHeader"></div>
 			<ul class="SearchHistory"></ul>
 	`;

@@ -10,7 +10,8 @@ import {setLocalStorage, getLocalStorage} from "./utils/index.js";
 export default class App extends BaseComponent {
 	constructor(target) {
 		super(target);
-
+	}
+	initialState() {
 		const lastest = getLocalStorage("lastestResults");
 		this.setState({
 			data: lastest ? JSON.parse(lastest) : [],

@@ -3,6 +3,8 @@ import BaseComponent from "../core/Component.js";
 export default class SearchInput extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+	}
+	initialState() {
 		this.setState({currentKeyword: this.props.currentKeyword});
 	}
 

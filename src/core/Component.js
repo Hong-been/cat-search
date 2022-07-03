@@ -2,7 +2,10 @@ export default class Component {
 	constructor(target, props) {
 		this.target = target;
 		this.props = props;
-		this.state = {};
+		this.initialState();
+	}
+
+	initialState() {
 		this.render();
 	}
 

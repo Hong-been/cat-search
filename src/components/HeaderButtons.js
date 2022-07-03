@@ -5,6 +5,9 @@ import BaseComponent from "../core/Component.js";
 export default class HeaderButtons extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+	}
+
+	initialState() {
 		this.setState({isDarkTheme});
 	}
 
@@ -38,6 +41,7 @@ export default class HeaderButtons extends BaseComponent {
 		</button>
     <button class="blueSquire randomButton">
 			<i class="fa-solid fa-shuffle shuffleIcon"></i>
+			<span>Random Cats</span>
 		</button>`;
 	}
 }
