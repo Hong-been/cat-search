@@ -49,6 +49,10 @@ input{
   box-sizing: inherit;
 }
 
+h1{
+  font-size: var(--font-large);
+}
+
 .fadeIn{
   opacity: 1;
   visibility: visible;

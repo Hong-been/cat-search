@@ -114,7 +114,6 @@
   border: 1px solid var(--dark-gray);
   border-radius: 30px;
   width: 80%;
-  max-height: 80%;
   height:fit-content;
   min-height: 200px;
   overflow-y: auto;
