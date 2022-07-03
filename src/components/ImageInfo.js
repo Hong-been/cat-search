@@ -1,6 +1,5 @@
 import BaseComponent from "../core/Component.js";
 import {modalStore} from "../stores/index.js";
-import {ScrollController} from "../utils/scrollController.js";
 
 export default class ImageInfo extends BaseComponent {
 	constructor(target, props) {
@@ -9,12 +8,6 @@ export default class ImageInfo extends BaseComponent {
 	}
 
 	componentDidMount() {
-		if (modalStore.state.isModalShow) {
-			ScrollController.blockScroll();
-		} else {
-			ScrollController.nonBlockScroll();
-		}
-
 		this.element.addEventListener("click", (e) => {
 			if (
 				e.target.closest(".closeButton") ||
