@@ -8,6 +8,9 @@
 .themeIcon, .shuffleIcon, .closeIcon{
   color: var(--light-gray)
 }
+.themeIcon, .shuffleIcon{
+  margin: 1px;
+}
 
 /* header */
 #header{
@@ -22,6 +25,12 @@
   text-align: center;
   font-size: 60px;
 }
+
+.Buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .SearchHeader {
   display: flex;
@@ -50,7 +59,9 @@
 .SearchHistory .searcedKeyword{
   margin: 0 10px 10px 0;
 }
-
+.searcedKeywordButton, .deleteKeywordButton{
+  color: var(--light-gray);
+}
 /* main */
 .SearchResult {
   margin-top: 10px;
@@ -70,7 +81,8 @@
 
 .SearchResult .item {
   display: inline-block;
-  margin: 0 0 10px 0;
+  margin: 0 0 80px 0;
+  padding: 0 20px;
   width: 100%;
   min-height: 200px;
   cursor: pointer;

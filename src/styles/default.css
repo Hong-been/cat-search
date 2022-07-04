@@ -43,6 +43,12 @@ input{
   color: var(--dark-gray)
 }
 
+button{
+  cursor: pointer;
+  border-style: none;
+  background-color: inherit;
+}
+
 *,
 *:before,
 *:after {

@@ -1,13 +1,4 @@
-button{
-  cursor: pointer;
-  border-style: none;
-  background-color: inherit;
-}
-.Buttons{
-  display: flex;
-}
-
-button.blueSquire{
+.blueSquire{
   padding: 8px;
   border-radius: 10px;
   background-color: var(--main-blue);
@@ -20,15 +11,15 @@ button.blueSquire{
   align-items: center;
 }
 
-button.blueSquire:hover{
+.blueSquire:hover{
   background-color: var(--main-blue-hover)
 }
 
-button.blueSquire i {
+.blueSquire i {
   width: 16px;
   height: 16px;
 }
-button.blueSquire span{
-  margin-left: 5px;
+.blueSquire span{
+  margin: 0 5px;
   color: var(--light-gray)
 }

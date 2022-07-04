@@ -32,16 +32,17 @@ export default class HeaderButtons extends BaseComponent {
 		}
 
 		return `
+		<button class="blueSquire randomButton">
+			<i class="fa-solid fa-paw shuffleIcon"></i>
+			<span>Random</span>
+			<i class="fa-solid fa-paw shuffleIcon"></i>
+		</button>
 		<button class="blueSquire themeButton">
 			${
 				this.state?.isDarkTheme
 					? `<i class="fa-solid fa-moon themeIcon"></i>`
 					: `<i class="fa-solid fa-sun themeIcon"></i>`
 			}
-		</button>
-    <button class="blueSquire randomButton">
-			<i class="fa-solid fa-shuffle shuffleIcon"></i>
-			<span>Random Cats</span>
 		</button>`;
 	}
 }
