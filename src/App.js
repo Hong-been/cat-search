@@ -4,7 +4,7 @@ import Main from "./components/Main.js";
 import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
 import {loadingStore, modalStore} from "./stores/index.js";
-import {api} from "./utils/api.js";
+import Api from "./utils/api.js";
 import ResultsStorage from "./utils/storage/resultsStorage.js";
 
 export default class App extends BaseComponent {
@@ -39,14 +39,14 @@ export default class App extends BaseComponent {
 		new Header(headerRoot, {
 			onSearch: async (keyword) => {
 				handleFetch(async () => {
-					const {data} = await api.fetchCats(keyword);
+					const {data} = await Api.fetchCats(keyword);
 					data ? this.setState({data}) : this.setState({data: []});
 					ResultsStorage.set(data);
 				});
 			},
 			onRandomClick: async () => {
 				handleFetch(async () => {
-					const {data} = await api.fetchRandom50();
+					const {data} = await Api.fetchRandom50();
 					this.setState({data});
 					ResultsStorage.set(data);
 				});
@@ -57,7 +57,7 @@ export default class App extends BaseComponent {
 			results: this.state.data,
 			onImageClick: async (image) => {
 				handleFetch(async () => {
-					const {data} = await api.fetchCatById(image.id);
+					const {data} = await Api.fetchCatById(image.id);
 					modalStore.setState({isModalShow: true, image: data});
 				});
 			},
