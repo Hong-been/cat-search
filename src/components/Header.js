@@ -2,9 +2,8 @@ import BaseComponent from "../core/Component.js";
 import HeaderButtons from "./HeaderButtons.js";
 import SearchInput from "./SearchInput.js";
 import SearchHistory from "./SearchHistory.js";
-import {getLocalStorage, setLocalStorage, getDom} from "../utils/index.js";
-
-const HISTORY_LIMIT = 10;
+import {getDom} from "../utils/index.js";
+import SearchHistoryStorage from "../utils/storage/searchHistoryStorage.js";
 
 export default class Header extends BaseComponent {
 	constructor(target, props) {
@@ -12,10 +11,9 @@ export default class Header extends BaseComponent {
 	}
 
 	initialState() {
-		const storageHistory = getLocalStorage("history");
 		this.setState({
 			currentKeyword: "",
-			searchedKeywords: storageHistory ? storageHistory.split(",") : [],
+			searchedKeywords: SearchHistoryStorage.get(),
 		});
 	}
 
@@ -31,18 +29,14 @@ export default class Header extends BaseComponent {
 		new SearchInput(searchHeader, {
 			currentKeyword: this.state.currentKeyword,
 			onAddSearchedKeyword: (keyword) => {
-				this.setState({
-					searchedKeywords:
-						this.state.searchedKeywords.length < HISTORY_LIMIT
-							? [...this.state.searchedKeywords, keyword]
-							: [...this.state.searchedKeywords.slice(1), keyword],
-				});
-				setLocalStorage("history", [...this.state.searchedKeywords]);
+				const newHistory = SearchHistoryStorage.add(keyword);
+				console.log(keyword, newHistory);
+				this.setState({searchedKeywords: newHistory});
 			},
 			onSearch,
 		});
 
-		this.searchHistory = new SearchHistory(searchHistory, {
+		new SearchHistory(searchHistory, {
 			history: this.state.searchedKeywords,
 			onKeywordClick: (e) => {
 				const keyword = e.target.closest(".searcedKeywordButton");
@@ -50,6 +44,14 @@ export default class Header extends BaseComponent {
 
 				this.setState({currentKeyword: keyword.innerText});
 				onSearch(keyword.innerText);
+			},
+			onDeleteClick: (e) => {
+				const deleteButton = e.target.closest(".deleteKeywordButton");
+				if (!deleteButton) return;
+
+				const keyword = deleteButton.dataset.keyword;
+				const newHistory = SearchHistoryStorage.remove(keyword);
+				this.setState({searchedKeywords: newHistory});
 			},
 		});
 	}

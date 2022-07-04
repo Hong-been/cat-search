@@ -5,14 +5,14 @@ import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
 import {loadingStore, modalStore} from "./stores/index.js";
 import {api} from "./utils/api.js";
-import {setLocalStorage, getLocalStorage} from "./utils/index.js";
+import ResultsStorage from "./utils/storage/resultsStorage.js";
 
 export default class App extends BaseComponent {
 	constructor(target) {
 		super(target);
 	}
 	initialState() {
-		const lastest = getLocalStorage("lastestResults");
+		const lastest = ResultsStorage.get();
 		this.setState({
 			data: lastest ? JSON.parse(lastest) : [],
 		});
@@ -22,14 +22,12 @@ export default class App extends BaseComponent {
 		const handleFetch = async (fetch) => {
 			try {
 				loadingStore.setState({isLoading: true});
-				// this.loading.setState(true);
 				await fetch();
 			} catch (e) {
 				console.error(e);
 				alert("일시적으로 문제가 발생했습니다. 잠시 뒤 다시 시도해주세요.");
 			} finally {
 				loadingStore.setState({isLoading: false});
-				// this.loading.setState(false);
 			}
 		};
 
@@ -37,23 +35,20 @@ export default class App extends BaseComponent {
 		const mainRoot = document.querySelector("#main");
 		const loadingModalRoot = document.querySelector("#loadingModal");
 		const imageModalRoot = document.querySelector("#imageModal");
-		// 검색히스토리가 두개씩 나와요.. debounce 필요
 
 		new Header(headerRoot, {
 			onSearch: async (keyword) => {
 				handleFetch(async () => {
 					const {data} = await api.fetchCats(keyword);
 					data ? this.setState({data}) : this.setState({data: []});
-
-					setLocalStorage("lastestResults", JSON.stringify(data));
+					ResultsStorage.set(data);
 				});
 			},
 			onRandomClick: async () => {
 				handleFetch(async () => {
 					const {data} = await api.fetchRandom50();
 					this.setState({data});
-
-					setLocalStorage("lastestResults", JSON.stringify(data));
+					ResultsStorage.set(data);
 				});
 			},
 		});

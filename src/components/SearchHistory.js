@@ -11,21 +11,23 @@ export default class SearchHistory extends BaseComponent {
 
 	componentDidMount() {
 		this.element.addEventListener("click", this.props.onKeywordClick);
+		this.element.addEventListener("click", this.props.onDeleteClick);
 	}
 
 	template() {
-		return `
-		${
-			this.state.history
-				? this.state.history
-						.map((word) => {
-							return `
-		<li class="searcedKeyword">
-			<button class="searcedKeywordButton blueSquire">${word}</button>
+		let templateString = ``;
+		this.state.history
+			? this.state.history.forEach((word) => {
+					templateString += `
+		<li class="searcedKeyword blueSquire">
+			<button class="searcedKeywordButton">${word}</button>
+			<button class="deleteKeywordButton" data-keyword=${word}>
+				<i class="fa-solid fa-xmark closeIcon"></i>
+			</button>
 		</li>`;
-						})
-						.join("")
-				: `<p>Search Cats!</p>`
-		}`;
+			  })
+			: `<p>Search Cats!</p>`;
+
+		return templateString;
 	}
 }

@@ -15,26 +15,9 @@ export const imageLazyLoading = (elements) => {
 			});
 		},
 		{
-			rootMargin: "100px 0px",
+			rootMargin: "200px 0px",
 		}
 	);
 
 	elements.forEach((element) => io.observe(element));
-};
-
-export const getLocalStorage = (key) => {
-	return window.localStorage.getItem(key);
-};
-//Set으로 구성하기
-export const removeSearchHistory = (key) => {
-	window.localStorage.removeItem(key);
-};
-export const setLocalStorage = (key, value) => {
-	console.log(`set localStorage: ${key}`);
-	window.localStorage.setItem(key, value);
-};
-
-export const deboune = (time, callback) => {
-	let timer;
-	å;
 };
