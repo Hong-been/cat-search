@@ -4,21 +4,18 @@ import BaseComponent from "../core/Component.js";
 export default class SearchResult extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
-		this.initFlag = true;
 	}
 	initialState() {
 		this.setState({results: this.props.results});
 	}
 
 	template() {
-		if (!this.state.results || !this.state.results.length) {
-			if (this.initFlag) {
-				this.initFlag = false;
-				return `
-				<p class="message">👓 Search cats here 👓</p>`;
-			}
-			return `
-				<p class="message">No cats 😿</p>`;
+		if (this.state.results === null) {
+			return `<p class="message">⬆️ Search cats here! ⬆️</p>`;
+		}
+
+		if (!this.state.results.length) {
+			return `<p class="message">No cats 😿</p>`;
 		}
 
 		return `

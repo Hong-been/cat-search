@@ -1,6 +1,6 @@
 import BaseComponent from "./core/Component.js";
 import Header from "./components/Header.js";
-import Main from "./components/Main.js";
+import SearchResult from "./components/SearchResult.js";
 import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
 import {loadingStore, modalStore} from "./stores/index.js";
@@ -17,7 +17,7 @@ export default class App extends BaseComponent {
 		const lastest = ResultsStorage.get();
 		this.setState({
 			currentKeyword: "",
-			data: lastest ? JSON.parse(lastest) : [],
+			data: lastest ? JSON.parse(lastest) : null,
 		});
 	}
 
@@ -28,7 +28,7 @@ export default class App extends BaseComponent {
 				await fetch();
 			} catch (e) {
 				console.error(e);
-				alert("일시적으로 문제가 발생했습니다. 잠시 뒤 다시 시도해주세요.");
+				alert("잠시 뒤 다시 시도해주세요 :)");
 			} finally {
 				loadingStore.setState({isLoading: false});
 			}
@@ -59,7 +59,7 @@ export default class App extends BaseComponent {
 			},
 		});
 
-		new Main(mainRoot, {
+		new SearchResult(mainRoot, {
 			results: this.state.data,
 			onImageClick: async (image) => {
 				handleFetch(async () => {
