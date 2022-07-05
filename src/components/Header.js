@@ -18,7 +18,6 @@ export default class Header extends BaseComponent {
 
 	componentDidMount() {
 		const {onSearch, onRandomClick} = this.props;
-
 		const buttons = getDom(".Buttons");
 		const searchHeader = getDom(".SearchHeader");
 		const searchHistory = getDom(".SearchHistory");
@@ -57,7 +56,7 @@ export default class Header extends BaseComponent {
 	template() {
 		return `
 			<div class="Buttons"></div>
-			<h1 class="HeaderTitle">Search Cats 🐈</h1>
+			<h1 class="HeaderTitle">Cat Sir! 🐈</h1>
 			<div class="SearchHeader"></div>
 			<ul class="SearchHistory"></ul>
 	`;
