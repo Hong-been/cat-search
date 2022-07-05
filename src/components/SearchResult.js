@@ -4,6 +4,16 @@ import BaseComponent from "../core/Component.js";
 export default class SearchResult extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+
+		this.element.addEventListener("click", (e) => {
+			const item = e.target.closest(".item");
+			if (!item) return;
+
+			const {index} = item.dataset;
+			this.props.onImageClick(this.state.results[index]);
+		});
+
+		imageLazyLoading(this.element.querySelectorAll(".lazyLoading"));
 	}
 	initialState() {
 		this.setState({results: this.props.results});
@@ -43,17 +53,5 @@ export default class SearchResult extends BaseComponent {
 				.join("")}
 		</ul>
 		`;
-	}
-
-	componentDidMount() {
-		this.element.addEventListener("click", (e) => {
-			const item = e.target.closest(".item");
-			if (!item) return;
-
-			const {index} = item.dataset;
-			this.props.onImageClick(this.state.results[index]);
-		});
-
-		imageLazyLoading(this.element.querySelectorAll(".lazyLoading"));
 	}
 }
