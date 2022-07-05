@@ -28,7 +28,7 @@ export default class SearchInput extends BaseComponent {
 	template() {
 		return `
 		<form>
-			<input type="text" placeholder="Cat Searching here 🐈" autofocus class="SearchInput" value=${this.state.currentKeyword}></input>
+			<input type="text" placeholder="Cat Searching here 🐈" autofocus class="SearchInput" value="${this.state.currentKeyword}"></input>
 	</form>
 	`;
 	}
