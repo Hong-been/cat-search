@@ -3,15 +3,13 @@ import BaseComponent from "../core/Component.js";
 export default class SearchHistory extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+
+		this.element.addEventListener("click", this.props.onKeywordClick);
+		this.element.addEventListener("click", this.props.onDeleteClick);
 	}
 
 	initialState() {
 		this.setState({history: this.props.history});
-	}
-
-	componentDidMount() {
-		this.element.addEventListener("click", this.props.onKeywordClick);
-		this.element.addEventListener("click", this.props.onDeleteClick);
 	}
 
 	template() {

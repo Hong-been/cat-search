@@ -5,9 +5,7 @@ export default class ImageInfo extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
 		modalStore.subscribe(this.render.bind(this));
-	}
 
-	componentDidMount() {
 		this.element.addEventListener("click", (e) => {
 			if (
 				e.target.closest(".closeButton") ||

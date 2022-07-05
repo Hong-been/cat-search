@@ -4,26 +4,26 @@ import BaseComponent from "../core/Component.js";
 export default class HeaderButtons extends BaseComponent {
 	constructor(target, props) {
 		super(target, props);
+
+		this.element.addEventListener("click", (e) => {
+			const randomButton = e.target.closest(".randomButton");
+			const themeButton = e.target.closest(".themeButton");
+
+			if (randomButton) {
+				this.props.onRandomClick();
+			}
+
+			if (themeButton) {
+				const isNextDark = !this.state.isDarkTheme;
+
+				this.setState({isDarkTheme: isNextDark});
+				isNextDark ? Theme.toggleToTheme("dark") : Theme.toggleToTheme("light");
+			}
+		});
 	}
 
 	initialState() {
 		this.setState({isDarkTheme: Theme.isDarkTheme()});
-	}
-
-	componentDidMount() {
-		const themeButton = document.querySelector(".themeButton");
-		const randomButton = document.querySelector(".randomButton");
-
-		themeButton.addEventListener("click", () => {
-			const isNextDark = !this.state.isDarkTheme;
-
-			this.setState({isDarkTheme: isNextDark});
-			isNextDark ? Theme.toggleToTheme("dark") : Theme.toggleToTheme("light");
-		});
-
-		randomButton.addEventListener("click", (e) => {
-			this.props.onRandomClick();
-		});
 	}
 
 	template() {
