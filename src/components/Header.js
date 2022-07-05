@@ -12,7 +12,6 @@ export default class Header extends BaseComponent {
 
 	initialState() {
 		this.setState({
-			currentKeyword: "",
 			searchedKeywords: SearchHistoryStorage.get(),
 		});
 	}
@@ -27,10 +26,9 @@ export default class Header extends BaseComponent {
 		new HeaderButtons(buttons, {onRandomClick});
 
 		new SearchInput(searchHeader, {
-			currentKeyword: this.state.currentKeyword,
+			currentKeyword: this.props.currentKeyword,
 			onAddSearchedKeyword: (keyword) => {
 				const newHistory = SearchHistoryStorage.add(keyword);
-				console.log(keyword, newHistory);
 				this.setState({searchedKeywords: newHistory});
 			},
 			onSearch,
@@ -40,18 +38,18 @@ export default class Header extends BaseComponent {
 			history: this.state.searchedKeywords,
 			onKeywordClick: (e) => {
 				const keyword = e.target.closest(".searcedKeywordButton");
-				if (!keyword) return;
-
-				this.setState({currentKeyword: keyword.innerText});
-				onSearch(keyword.innerText);
+				if (keyword) {
+					this.setState({currentKeyword: keyword.innerText});
+					onSearch(keyword.innerText);
+				}
 			},
 			onDeleteClick: (e) => {
 				const deleteButton = e.target.closest(".deleteKeywordButton");
-				if (!deleteButton) return;
-
-				const keyword = deleteButton.dataset.keyword;
-				const newHistory = SearchHistoryStorage.remove(keyword);
-				this.setState({searchedKeywords: newHistory});
+				if (deleteButton) {
+					const keyword = deleteButton.dataset.keyword;
+					const newHistory = SearchHistoryStorage.remove(keyword);
+					this.setState({searchedKeywords: newHistory});
+				}
 			},
 		});
 	}

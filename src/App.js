@@ -11,17 +11,12 @@ import ResultsStorage from "./utils/storage/resultsStorage.js";
 export default class App extends BaseComponent {
 	constructor(target) {
 		super(target);
-
-		// const loadingModalRoot = getDom("#loadingModal");
-		// const imageModalRoot = getDom("#imageModal");
-
-		// new Loading(loadingModalRoot);
-		// new ImageInfo(imageModalRoot);
 	}
 
 	initialState() {
 		const lastest = ResultsStorage.get();
 		this.setState({
+			currentKeyword: "",
 			data: lastest ? JSON.parse(lastest) : [],
 		});
 	}
@@ -45,17 +40,20 @@ export default class App extends BaseComponent {
 		const imageModalRoot = getDom("#imageModal");
 
 		new Header(headerRoot, {
+			currentKeyword: this.state.currentKeyword,
 			onSearch: async (keyword) => {
 				handleFetch(async () => {
 					const {data} = await Api.fetchCats(keyword);
-					data ? this.setState({data}) : this.setState({data: []});
+					data
+						? this.setState({data, currentKeyword: keyword})
+						: this.setState({data: [], currentKeyword: keyword});
 					ResultsStorage.set(data);
 				});
 			},
 			onRandomClick: async () => {
 				handleFetch(async () => {
 					const {data} = await Api.fetchRandom50();
-					this.setState({data});
+					this.setState({data, currentKeyword: ""});
 					ResultsStorage.set(data);
 				});
 			},
