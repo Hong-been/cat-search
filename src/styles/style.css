@@ -63,6 +63,12 @@
   color: var(--light-gray);
 }
 /* main */
+.message{
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+}
+
 .SearchResult {
   margin-top: 10px;
   margin-bottom: 100px;
@@ -87,12 +93,6 @@
   cursor: pointer;
   position: relative;
   border-radius: var(--border-radius);
-}
-
-.SearchResult p{
-  display: block;
-  margin: 0 auto;
-  position: absolute;
 }
 
 .SearchResult .item:hover::before{
