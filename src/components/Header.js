@@ -4,6 +4,7 @@ import SearchInput from "./SearchInput.js";
 import SearchHistory from "./SearchHistory.js";
 import {getDom} from "../utils/index.js";
 import SearchHistoryStorage from "../utils/storage/searchHistoryStorage.js";
+import "../styles/header.css";
 
 export default class Header extends BaseComponent {
 	constructor(target, props) {

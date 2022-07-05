@@ -1,5 +1,6 @@
 import {imageLazyLoading} from "../utils/index.js";
 import BaseComponent from "../core/Component.js";
+import "../styles/searchResult.css";
 
 export default class SearchResult extends BaseComponent {
 	constructor(target, props) {

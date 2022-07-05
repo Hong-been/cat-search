@@ -7,6 +7,9 @@ import {loadingStore, modalStore} from "./stores/index.js";
 import Api from "./utils/api.js";
 import {getDom} from "./utils/index.js";
 import ResultsStorage from "./utils/storage/resultsStorage.js";
+import "./styles/app.css";
+import "./styles/modal.css";
+import "./styles/buttonSquire.css";
 
 export default class App extends BaseComponent {
 	constructor(target) {
