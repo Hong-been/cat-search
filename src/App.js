@@ -5,12 +5,20 @@ import Loading from "./components/Loading.js";
 import ImageInfo from "./components/ImageInfo.js";
 import {loadingStore, modalStore} from "./stores/index.js";
 import Api from "./utils/api.js";
+import {getDom} from "./utils/index.js";
 import ResultsStorage from "./utils/storage/resultsStorage.js";
 
 export default class App extends BaseComponent {
 	constructor(target) {
 		super(target);
+
+		// const loadingModalRoot = getDom("#loadingModal");
+		// const imageModalRoot = getDom("#imageModal");
+
+		// new Loading(loadingModalRoot);
+		// new ImageInfo(imageModalRoot);
 	}
+
 	initialState() {
 		const lastest = ResultsStorage.get();
 		this.setState({
@@ -31,10 +39,10 @@ export default class App extends BaseComponent {
 			}
 		};
 
-		const headerRoot = document.querySelector("#header");
-		const mainRoot = document.querySelector("#main");
-		const loadingModalRoot = document.querySelector("#loadingModal");
-		const imageModalRoot = document.querySelector("#imageModal");
+		const headerRoot = getDom("#header");
+		const mainRoot = getDom("#main");
+		const loadingModalRoot = getDom("#loadingModal");
+		const imageModalRoot = getDom("#imageModal");
 
 		new Header(headerRoot, {
 			onSearch: async (keyword) => {
