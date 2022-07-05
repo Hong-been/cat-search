@@ -23,13 +23,8 @@ export default class Component {
 
 	render() {
 		console.log(`✨ Render: ${this.__proto__.constructor.name}`);
-		const template = document.createElement("template");
-		template.innerHTML = this.template();
-		// this.element = template.content.firstElementChild;
 		this.element = this.target;
 		this.target.innerHTML = this.template();
-		// if (this.element) this.target.appendChild(this.element);
-		// else this.element = this.target;
 
 		this.componentDidMount();
 	}
