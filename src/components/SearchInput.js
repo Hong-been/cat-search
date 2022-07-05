@@ -1,34 +1,35 @@
-import BaseComponent from "./BaseComponent.js";
+import BaseComponent from "../core/Component.js";
 
 export default class SearchInput extends BaseComponent {
-	constructor({$target, initialState, onAddSearchedKeyword, onSearch}) {
-		super(`
-			<form>
-				<input type="text" placeholder="Search Cats 🐈" autofocus class="SearchInput">
-		</form>
-		`);
+	constructor(target, props) {
+		super(target, props);
 
-		this.$searchInput = this.$element.querySelector(".SearchInput");
-		this.$searchInput.addEventListener("click", () => {
-			this.$searchInput.value = "";
-		});
-		this.$element.addEventListener("submit", (e) => {
+		this.element.addEventListener("submit", (e) => {
 			e.preventDefault();
+			this.searchInput = this.element.querySelector(".SearchInput");
+			const value = this.searchInput.value;
 
-			const value = this.$searchInput.value;
-
-			onAddSearchedKeyword(value);
-			onSearch(value);
+			this.props.onAddSearchedKeyword(value);
+			this.props.onSearch(value);
 		});
 
-		$target.appendChild(this.$element);
-		this.setState(initialState);
+		this.element.addEventListener("click", (e) => {
+			const SearchInput = e.target.closest(".SearchInput");
+			if (SearchInput) {
+				SearchInput.value = "";
+			}
+		});
 	}
-	setState(nextState) {
-		this.state = nextState;
-		this.render();
+
+	initialState() {
+		this.setState({currentKeyword: this.props.currentKeyword});
 	}
-	render() {
-		this.$searchInput.value = this.state.currentKeyword;
+
+	template() {
+		return `
+		<form>
+			<input type="text" placeholder="Cat Searching here 🐈" autofocus class="SearchInput" value="${this.state.currentKeyword}"></input>
+	</form>
+	`;
 	}
 }

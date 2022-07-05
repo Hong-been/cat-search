@@ -1,29 +1,31 @@
-import BaseComponent from "./BaseComponent.js";
+import BaseComponent from "../core/Component.js";
 
 export default class SearchHistory extends BaseComponent {
-	constructor({$target, initialState, onKeywordClick}) {
-		super(`<ul class="searchHistory"></ul>`);
+	constructor(target, props) {
+		super(target, props);
 
-		$target.appendChild(this.$element);
-		this.$element.addEventListener("click", onKeywordClick);
+		this.element.addEventListener("click", this.props.onKeywordClick);
+		this.element.addEventListener("click", this.props.onDeleteClick);
+	}
 
-		this.state = initialState;
-		this.render();
+	initialState() {
+		this.setState({history: this.props.history});
 	}
-	setState(nextState) {
-		this.state = nextState;
-		this.render();
-	}
-	render() {
-		this.$element.innerHTML = this.state.history
-			? this.state.history
-					.map((word) => {
-						return `
-        <li class="searcedKeyword">
-          <button class="searcedKeywordButton blueSquire">${word}</button>
-        </li>`;
-					})
-					.join("")
-			: `<div>Try to search cats!</div>`;
+
+	template() {
+		let templateString = ``;
+		this.state.history
+			? this.state.history.forEach((word) => {
+					templateString += `
+		<li class="searcedKeyword blueSquire">
+			<button class="searcedKeywordButton">${word}</button>
+			<button class="deleteKeywordButton" data-keyword=${word}>
+				<i class="fa-solid fa-xmark closeIcon"></i>
+			</button>
+		</li>`;
+			  })
+			: `<p>Search Cats!</p>`;
+
+		return templateString;
 	}
 }

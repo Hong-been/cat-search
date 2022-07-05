@@ -1,24 +1,25 @@
-button{
-  cursor: pointer;
-  border-style: none;
-  background-color: inherit;
-}
-
-button.blueSquire{
+.blueSquire{
   padding: 8px;
   border-radius: 10px;
   background-color: var(--main-blue);
   color: var(--light-gray);
   margin-right: 4px;
   font-size: var(--font-medium);
-  height: fit-content;
+  min-height: 16px;
+  min-width: 16px;
+  display: flex;
+  align-items: center;
 }
 
-button.blueSquire:hover{
+.blueSquire:hover{
   background-color: var(--main-blue-hover)
 }
 
-button i {
+.blueSquire i {
   width: 16px;
   height: 16px;
+}
+.blueSquire span{
+  margin: 0 5px;
+  color: var(--light-gray)
 }

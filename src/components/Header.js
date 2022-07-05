@@ -1,71 +1,65 @@
-import BaseComponent from "./BaseComponent.js";
-import RandomButton from "./RandomButton.js";
-import ThemeButton from "./ThemeButton.js";
+import BaseComponent from "../core/Component.js";
+import HeaderButtons from "./HeaderButtons.js";
 import SearchInput from "./SearchInput.js";
 import SearchHistory from "./SearchHistory.js";
-
-const HISTORY_LIMIT = 10;
+import {getDom} from "../utils/index.js";
+import SearchHistoryStorage from "../utils/storage/searchHistoryStorage.js";
+import "../styles/header.css";
 
 export default class Header extends BaseComponent {
-	constructor({$target, onSearch, onRandomClick}) {
-		super(`
-			<header id="Header">
-				<div class="Buttons"></div>
-				<h1 class="HeaderTitle">Get Your Cats 🐈</h1>
-				<div class="SearchHeader"></div>
-			</header>
-		`);
+	constructor(target, props) {
+		super(target, props);
+	}
 
-		this.state = {
-			currentKeyword: "",
-			searchedKeywords: window.localStorage.getItem("history")
-				? window.localStorage.getItem("history").split(",")
-				: [],
-		};
-
-		$target.appendChild(this.$element);
-
-		const $buttons = this.$element.querySelector(".Buttons");
-		this.themeButton = new ThemeButton({$target: $buttons});
-		this.randomButton = new RandomButton({
-			$target: $buttons,
-			onRandomClick,
+	initialState() {
+		this.setState({
+			searchedKeywords: SearchHistoryStorage.get(),
 		});
+	}
 
-		const $searchHeader = this.$element.querySelector(".SearchHeader");
-		this.searchInput = new SearchInput({
-			$target: $searchHeader,
-			initialState: {currentKeyword: this.state.currentKeyword},
+	componentDidMount() {
+		const {onSearch, onRandomClick} = this.props;
+		const buttons = getDom(".Buttons");
+		const searchHeader = getDom(".SearchHeader");
+		const searchHistory = getDom(".SearchHistory");
+
+		new HeaderButtons(buttons, {onRandomClick});
+
+		new SearchInput(searchHeader, {
+			currentKeyword: this.props.currentKeyword,
 			onAddSearchedKeyword: (keyword) => {
-				this.setState({
-					...this.state,
-					searchedKeywords:
-						this.state.searchedKeywords.length < HISTORY_LIMIT
-							? [...this.state.searchedKeywords, keyword]
-							: [...this.state.searchedKeywords.slice(1), keyword],
-				});
-				window.localStorage.setItem("history", [
-					...this.state.searchedKeywords,
-				]);
+				const newHistory = SearchHistoryStorage.add(keyword);
+				this.setState({searchedKeywords: newHistory});
 			},
 			onSearch,
 		});
 
-		this.searchHistory = new SearchHistory({
-			$target: this.$element,
-			initialState: {history: this.state.searchedKeywords},
+		new SearchHistory(searchHistory, {
+			history: this.state.searchedKeywords,
 			onKeywordClick: (e) => {
 				const keyword = e.target.closest(".searcedKeywordButton");
-				if (!keyword) return;
-
-				this.setState({...this.state, currentKeyword: keyword.innerText});
-				onSearch(keyword.innerText);
+				if (keyword) {
+					this.setState({currentKeyword: keyword.innerText});
+					onSearch(keyword.innerText);
+				}
+			},
+			onDeleteClick: (e) => {
+				const deleteButton = e.target.closest(".deleteKeywordButton");
+				if (deleteButton) {
+					const keyword = deleteButton.dataset.keyword;
+					const newHistory = SearchHistoryStorage.remove(keyword);
+					this.setState({searchedKeywords: newHistory});
+				}
 			},
 		});
 	}
-	setState(nextState) {
-		this.state = nextState;
-		this.searchInput.setState({currentKeyword: this.state.currentKeyword});
-		this.searchHistory.setState({history: this.state.searchedKeywords});
+
+	template() {
+		return `
+			<div class="Buttons"></div>
+			<h1 class="HeaderTitle">Cat Sir! 🐈</h1>
+			<div class="SearchHeader"></div>
+			<ul class="SearchHistory"></ul>
+	`;
 	}
 }

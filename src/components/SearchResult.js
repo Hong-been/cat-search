@@ -1,55 +1,58 @@
-import {imageLazyLoading} from "../utils/lazyLoad.js";
-import BaseComponent from "./BaseComponent.js";
+import {imageLazyLoading} from "../utils/index.js";
+import BaseComponent from "../core/Component.js";
+import "../styles/searchResult.css";
 
 export default class SearchResult extends BaseComponent {
-	constructor({$target, initialData, onImageClick}) {
-		super(`
-		<ul class="SearchResult"></ul>
-		`);
-		this.initFlag = true;
+	constructor(target, props) {
+		super(target, props);
 
-		this.$element.addEventListener("click", (e) => {
+		this.element.addEventListener("click", (e) => {
 			const item = e.target.closest(".item");
 			if (!item) return;
 
 			const {index} = item.dataset;
-			onImageClick(this.data[index]);
+			this.props.onImageClick(this.state.results[index]);
 		});
 
-		$target.appendChild(this.$element);
-		this.setState(initialData);
+		imageLazyLoading(this.element.querySelectorAll(".lazyLoading"));
+	}
+	initialState() {
+		this.setState({results: this.props.results});
 	}
 
-	setState(nextData) {
-		this.data = nextData;
-		this.render();
-	}
+	template() {
+		if (this.state.results === null) {
+			return `<p class="message">⬆️ Search cats here! ⬆️</p>`;
+		}
 
-	render() {
-		if (!this.data || !this.data.length) {
-			if (this.initFlag) {
-				this.initFlag = false;
-				this.$element.innerHTML = ``;
-				return;
-			}
-			this.initFlag = false;
-			this.$element.innerHTML = `<p>No cats 🐈‍⬛</p>`;
-		} else {
-			this.$element.innerHTML = this.data
-				.map(
-					(cat, index) =>
-						`<li 
-					class="item" 
+		if (!this.state.results.length) {
+			return `<p class="message">No cats 😿</p>`;
+		}
+
+		return `
+		<ul class="SearchResult">
+			${this.state.results
+				.map((cat, index) => {
+					return index < 3
+						? `<li 
+						class="item" 
+						data-index=${index} 
+						data-url=${cat.url} 
+						tooltip=${cat.name.split(" ").join("")}>
+						<img src="${cat.url}" alt=${cat.name.split(" ").join("")} />
+					</li>
+				`
+						: `<li 
+					class="item lazyLoading" 
 					data-index=${index} 
 					data-url=${cat.url} 
 					tooltip=${cat.name.split(" ").join("")}>
           <img src="" alt=${cat.name.split(" ").join("")} />
-        </ul>
-			`
-				)
-				.join("");
-
-			imageLazyLoading(this.$element.querySelectorAll(".item"));
-		}
+        </li>
+			`;
+				})
+				.join("")}
+		</ul>
+		`;
 	}
 }

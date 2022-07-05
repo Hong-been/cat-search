@@ -1,0 +1,88 @@
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  font-display: swap;
+  src: local('Spoqa Han Sans Neo Regular'),
+  url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.ttf') format('truetype');
+}
+
+:root{
+  --pc-width: 992px;
+  --tablet-width: 768px;
+  --mobile-width: 576px;
+
+  --main-blue: #2d59f0;
+  --main-blue-hover: #193bae;
+  --main-yellow: #F9F871;
+  --dark-gray: #343842;
+  --middle-gray:#273035;
+  --light-gray:#f2f2f2;
+
+  --font-large: 24px;
+  --font-medium: 16px;
+  --font-small: 12px;
+
+  --modal-zindex: 10;
+  --header-zindex: 1;
+
+  --border-radius: 10px;
+}
+
+html {
+  box-sizing: border-box;
+  background-color: var(--background);
+}
+
+body * {
+  font-family: 'Spoqa Han Sans Neo',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, monospace,'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--color);
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style:none;
+  color: var(--color);
+}
+
+input{
+  color: var(--dark-gray)
+}
+
+button{
+  cursor: pointer;
+  border-style: none;
+  background-color: inherit;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h1{
+  font-size: var(--font-large);
+}
+
+.fadeIn{
+  opacity: 1;
+  visibility: visible;
+  transition: all 200ms ease-in-out;
+}
+
+.fadeOut{
+  opacity: 0;
+  visibility: hidden;
+  transition: all 200ms ease-in-out;
+}
+
+#App {
+  margin: 1.5em auto;
+  max-width: 1200px;
+  column-gap: 1.5em;
+}
