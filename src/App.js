@@ -22,6 +22,9 @@ export default class App extends BaseComponent {
 	}
 
 	componentDidMount() {
+		loadingStore.unsubscribeAll();
+		modalStore.unsubscribeAll();
+
 		const handleFetch = async (fetch) => {
 			try {
 				loadingStore.setState({isLoading: true});

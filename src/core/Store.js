@@ -18,6 +18,10 @@ export default class Store {
 		this.observers = this.observers.filter((observer) => observer !== func);
 	}
 
+	unsubscribeAll() {
+		this.observers = [];
+	}
+
 	notify() {
 		this.observers.forEach((observer) => observer());
 	}
