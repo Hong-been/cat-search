@@ -28,7 +28,8 @@ export default class SearchInput extends BaseComponent {
 	template() {
 		return `
 		<form>
-			<input type="text" placeholder="Cat Searching here 🐈" autofocus class="SearchInput" value="${this.state.currentKeyword}"></input>
+			<input type="text" placeholder="country, breed, temperament" autofocus class="SearchInput" value="${this.state.currentKeyword}"></input>
+			<p class="searchExample">✏️ ex) Russia, United States, 먼치킨, 러시안블루, 페르시안, 샴, 스노우슈, Playful, Loving, Energetic</p>
 	</form>
 	`;
 	}
