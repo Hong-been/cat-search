@@ -7,7 +7,7 @@
 <br>
 
 ## 라이트모드 홈 페이지
-<img width="800" alt="스크린샷 2022-06-17 오전 2 16 10" src="https://user-images.githubusercontent.com/65804460/174129031-f986c63b-afb5-4825-98c9-d8ce4549872f.png">
+<img width="800" alt="스크린샷 2022-07-12 오전 12 14 26" src="https://user-images.githubusercontent.com/65804460/178297576-cf26d8ba-0872-4e27-9971-e6cfbaecd3ec.png">
 
 - 상단의 다크모드 토글버튼과 랜덤고양이 버튼이 있습니다.
 - 최신 검색결과 혹은 랜덤결과를 로컬스토리지에 저장하여 보여줍니다.
@@ -15,7 +15,7 @@
 <br>
 
 ## 다크모드 홈 페이지
-<img width="800" alt="스크린샷 2022-06-17 오전 2 16 28" src="https://user-images.githubusercontent.com/65804460/174129095-dc127e6e-a22a-45dc-a156-669b2d6b41e5.png">
+<img width="800" alt="스크린샷 2022-07-12 오전 12 14 02" src="https://user-images.githubusercontent.com/65804460/178297501-55247379-0271-432b-97d7-567e0b527bb2.png">
 
 - 라이트/다크모드 토글할 수 있습니다.
 - 사용자의 시스템설정 모드를 감지하여 보여줍니다.
@@ -23,18 +23,20 @@
 <br>
 
 ## 검색창
-<img width="1004" alt="스크린샷 2022-06-17 오전 2 20 33" src="https://user-images.githubusercontent.com/65804460/174129713-e32a5c38-6f30-4179-ad5a-a501fa0f035b.png">
+<img width="800" alt="스크린샷 2022-07-12 오전 12 15 10" src="https://user-images.githubusercontent.com/65804460/178297721-01e75e99-38de-4e65-b877-674c98dca0b7.png">
 
 - 검색 히스토리를 10개까지 저장할 수 있습니다.
 - 키워드를 누르면 검색합니다.
+- 로컬스토리지에 히스토리가 저장됩니다.
 
 <br>
 
 ## 모달
-![QuickTime movie](https://user-images.githubusercontent.com/65804460/174131345-8db1e7cf-efd9-456d-a635-957c4d7b39cb.gif)
+![QuickTime movie](https://user-images.githubusercontent.com/65804460/178298094-3c918d19-7a86-4b1b-8361-6d75d7b3123a.gif)
+
 
 - 자세한 정보를 보기위해 모달창을 사용하였습니다.
-- 자연스러운 fade in,out효과를 적용했습니다.
+- 서버와 통신하는 동안, 로딩스피너를 보여줍니다.
 
 <br>
 
